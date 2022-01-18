@@ -9,8 +9,6 @@
     prune = true
 [help]
     autocorrect = 10
-[include]
-    path = ~/.gitconfig_local
 [push]
     default = current
 [rerere]
@@ -30,3 +28,6 @@
 	rebase = false
 [init]
 	defaultBranch = develop
+[user]
+	name = gagocaan
+	email = gagocaan@gmail.com
