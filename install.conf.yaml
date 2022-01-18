@@ -13,7 +13,7 @@
           ~/.config/nvim: nvim
 
 - shell:
-          - [~/.dotfiles/scripts/linux-setup.sh, Installing requirements]
+          - [~/.dotfiles/scripts/run-setup.sh, Installing requirements]
           - [git submodule update --init --recursive, Installing submodules]
           - [
                     "nvim +PlugUpdate +PlugClean! +qa",
