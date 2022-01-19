@@ -88,6 +88,7 @@ source ~/.config/nvim/plugins/nerdtree.vim
 source ~/.config/nvim/plugins/floaterm.vim
 source ~/.config/nvim/plugins/fugitive.vim
 source ~/.config/nvim/plugins/deoplete.vim
+source ~/.config/nvim/plugins/auto-pairs.vim
 
 call plug#end()
 
