@@ -85,6 +85,7 @@ call plug#begin(data_dir . '/plugins')
 source ~/.config/nvim/plugins/airline.vim
 source ~/.config/nvim/plugins/dracula.vim
 source ~/.config/nvim/plugins/nerdtree.vim
+source ~/.config/nvim/plugins/floaterm.vim
 
 call plug#end()
 
