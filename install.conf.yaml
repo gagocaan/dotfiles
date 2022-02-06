@@ -16,6 +16,6 @@
           - [~/.dotfiles/scripts/run-setup.sh, Installing requirements]
           - [git submodule update --init --recursive, Installing submodules]
           - [
-                    "nvim +PlugUpdate +PlugClean! +qa",
+                    "nvim +PlugUpdate +PlugClean! +qa +UpdateRemotePlugins",
                     Installing and updating plugins,
             ]

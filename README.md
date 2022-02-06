@@ -55,7 +55,7 @@ Clone the repository to your `$HOME` directory as `.dotfiles` and then run the i
 ```bash
 # Clone
 cd ~
-git clone https://github.com/gagocaan/dotfiles.git .dotfiles
+git clone https://github.com/gagocaan/dotfiles.git ~/.dotfiles
 
 # Install
 ~/.dotfiles/install
