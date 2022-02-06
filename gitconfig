@@ -1,7 +1,7 @@
 [color]
     ui = auto
 [core]
-    editor = vim
+    editor = nvim
     pager = delta
 [diff]
     tool = vimdiff

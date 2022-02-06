@@ -1,6 +1,5 @@
 #!/bin/bash -e
 
-# TODO: Improve for other OS
 case $(uname) in
 Darwin)
     echo "Install requirements for Mac OS ..."
@@ -15,12 +14,21 @@ Darwin)
     echo "Installation finished."
     ;;
 Linux)
-    echo "Install requirements for Linux ..."
-    apt update
-    apt install -y coreutils git delta git-flow neovim python3-pip curl tree lolcat virtualenv zsh zsh-autosuggestions zsh-syntax-highlighting
-    # TODO: Test if has pip
-    pip3 install pynvim jedi
-    echo "Installation finished."
+    if [[ $(. /etc/os-release; echo "$NAME") == "Fedora Linux" ]]; then
+        echo "Install requirements for Fedora Linux"
+        dnf update
+        dnf install -y coreutils git neovim python3-pip curl tree lolcat virtualenv zsh zsh-autosuggestions zsh-syntax-highlighting
+        # TODO: Test if has pip
+        pip3 install pynvim jedi
+        echo "Installation finished"
+    else
+        echo "Install requirements for Linux ..."
+        apt update
+        apt install -y coreutils git delta git-flow neovim python3-pip curl tree lolcat virtualenv zsh zsh-autosuggestions zsh-syntax-highlighting
+        # TODO: Test if has pip
+        pip3 install pynvim jedi
+        echo "Installation finished."
+    fi
     ;;
 *)
     echo "The Operating System is not recognized."
