@@ -24,9 +24,11 @@ Linux)
     else
         echo "Install requirements for Linux ..."
         apt update
-        apt install -y coreutils git delta git-flow neovim python3-pip curl tree lolcat virtualenv zsh zsh-autosuggestions zsh-syntax-highlighting
+        apt install -y coreutils git delta git-flow git-core neovim fonts-powerline python3-pip curl tree lolcat virtualenv zsh zsh-autosuggestions zsh-syntax-highlighting
         # TODO: Test if has pip
         pip3 install pynvim jedi
+
+        sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
         echo "Installation finished."
     fi
     ;;
