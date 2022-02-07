@@ -48,7 +48,7 @@ set smartcase
 set noshowmode
 
 " Permite compartir el portapapeles entre vim y la maquina
-set clipboard=unnamed
+set clipboard=unnamedplus
 
 "--------------------------------------------------------------------------
 " Key maps
@@ -67,7 +67,9 @@ nnoremap <Leader>w :w<CR>
 " NERDTree
 nnoremap <leader>b :NERDTreeFocus<CR>
 nnoremap <C-b> :NERDTreeToggle<CR>
-nnoremap <C-f> :NERDTreeFind<CR>
+
+" Python
+nnoremap ﬁ :! python -m black %; python -m isort %<CR>
 
 "--------------------------------------------------------------------------
 " Plugins
