@@ -6,11 +6,15 @@
 
 ## 📖 Description
 
+A self-contained technology is used to rapidly obtain a development environment.
+
 > 🚧 Under construction ...
 
 ## 🎯 Summary
 
-> 🚧 Under construction ...
+* Install and pre-configure ZSH.
+* Install and configure NeoVim to develop in Python. (Also supports other programming languages).
+* Configure git.
 
 ## 🧬 Project structure
 
@@ -40,13 +44,11 @@
 
 Make sure your Operating System has the following packages installed.
 
-1. Git
+1. git
 2. curl
-3. python
-4. [git-delta](https://dandavison.github.io/delta/introduction.html)
-5. NeoVim
+3. Python
 
-> Most OS have pre-installed with `[1,2,3]`, `[4,5]` must be installed manually.
+> Most OS have pre-installed with `[1,2,3]`, just make sure!.
 
 ## 🍴 Usage
 

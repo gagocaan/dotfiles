@@ -14,7 +14,10 @@ Darwin)
     echo "Installation finished."
     ;;
 Linux)
-    if [[ $(. /etc/os-release; echo "$NAME") == "Fedora Linux" ]]; then
+    if [[ $(
+        . /etc/os-release
+        echo "$NAME"
+    ) == "Fedora Linux" ]]; then
         echo "Install requirements for Fedora Linux"
         dnf update
         dnf install -y coreutils git neovim python3-pip curl tree lolcat virtualenv zsh zsh-autosuggestions zsh-syntax-highlighting
@@ -24,7 +27,7 @@ Linux)
     else
         echo "Install requirements for Linux ..."
         sudo apt update
-        sudo apt install -y coreutils git delta git-flow git-core neovim fonts-powerline python3-pip curl tree lolcat virtualenv zsh zsh-autosuggestions zsh-syntax-highlighting
+        sudo apt install -y coreutils git git-flow git-core neovim fonts-powerline python3-pip curl tree lolcat virtualenv zsh zsh-autosuggestions zsh-syntax-highlighting
         # TODO: Test if has pip
         pip3 install pynvim jedi
 

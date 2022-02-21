@@ -1,16 +1,16 @@
 - defaults:
-          link:
-                  relink: true
+    link:
+      relink: true
 
 - clean: ["~"]
 
 - create:
-          - ~/Workspace
-          - ~/.config
+    - ~/Workspace
+    - ~/.config
 
 - link:
-          ~/.gitconfig: gitconfig
-          ~/.config/nvim: nvim
+    ~/.gitconfig: gitconfig
+    ~/.config/nvim: nvim
 
 - shell:
     - command: ~/.dotfiles/scripts/run-setup.sh
@@ -21,4 +21,4 @@
     - [
         "nvim +PlugUpdate +PlugClean! +UpdateRemotePlugins +qa",
         Installing and updating plugins,
-        ]
+      ]
