@@ -13,9 +13,12 @@
           ~/.config/nvim: nvim
 
 - shell:
-          - [~/.dotfiles/scripts/run-setup.sh, Installing requirements]
-          - [git submodule update --init --recursive, Installing submodules]
-          - [
-                    "nvim +PlugUpdate +PlugClean! +UpdateRemotePlugins +qa",
-                    Installing and updating plugins,
-            ]
+    - command: ~/.dotfiles/scripts/run-setup.sh
+      stdin: true
+      stdout: true
+      description: Installing requirements
+    - [git submodule update --init --recursive, Installing submodules]
+    - [
+        "nvim +PlugUpdate +PlugClean! +UpdateRemotePlugins +qa",
+        Installing and updating plugins,
+        ]

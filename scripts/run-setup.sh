@@ -23,8 +23,8 @@ Linux)
         echo "Installation finished"
     else
         echo "Install requirements for Linux ..."
-        apt update
-        apt install -y coreutils git delta git-flow git-core neovim fonts-powerline python3-pip curl tree lolcat virtualenv zsh zsh-autosuggestions zsh-syntax-highlighting
+        sudo apt update
+        sudo apt install -y coreutils git delta git-flow git-core neovim fonts-powerline python3-pip curl tree lolcat virtualenv zsh zsh-autosuggestions zsh-syntax-highlighting
         # TODO: Test if has pip
         pip3 install pynvim jedi
 
