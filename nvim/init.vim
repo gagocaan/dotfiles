@@ -69,7 +69,7 @@ nnoremap <leader>b :NERDTreeFocus<CR>
 nnoremap <C-b> :NERDTreeToggle<CR>
 
 " Python
-nnoremap ﬁ :! python -m black %; python -m isort %<CR>
+nnoremap ﬁ :! python3 -m black %; python3 -m isort %<CR>
 
 "--------------------------------------------------------------------------
 " Plugins
@@ -85,12 +85,12 @@ endif
 call plug#begin(data_dir . '/plugins')
 
 source ~/.config/nvim/plugins/airline.vim
+source ~/.config/nvim/plugins/auto-pairs.vim
+source ~/.config/nvim/plugins/coc.vim
 source ~/.config/nvim/plugins/dracula.vim
-source ~/.config/nvim/plugins/nerdtree.vim
 source ~/.config/nvim/plugins/floaterm.vim
 source ~/.config/nvim/plugins/fugitive.vim
-source ~/.config/nvim/plugins/deoplete.vim
-source ~/.config/nvim/plugins/auto-pairs.vim
+source ~/.config/nvim/plugins/nerdtree.vim
 
 call plug#end()
 
@@ -110,3 +110,9 @@ let g:lightline = {
 " Start NERDTree when Vim is started without file arguments.
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
+
+" Exit Vim if NERDTree is the only window remaining in the only tab.
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+
+" Close the tab if NERDTree is the only window remaining in it.
+autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif

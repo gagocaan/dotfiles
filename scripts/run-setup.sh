@@ -8,9 +8,10 @@ Darwin)
         # Install Homebrew
         ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     fi
-    brew update
-    brew install coreutils git-delta git-flow go lolcat neovim poetry powerlevel10k tree virtualenv zsh zsh-autosuggestions zsh-syntax-highlighting
-    pip3 install pynvim jedi
+    brew upgrade
+    brew cleanup
+    brew install coreutils git-delta git-flow go lolcat neovim node poetry powerlevel10k tree virtualenv zsh zsh-autosuggestions zsh-syntax-highlighting
+    pip3 install pynvim black flake8 isort
     echo "Installation finished."
     ;;
 Linux)

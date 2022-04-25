@@ -8,8 +8,6 @@
 
 A self-contained technology is used to rapidly obtain a development environment.
 
-> 🚧 Under construction ...
-
 ## 🎯 Summary
 
 * Install and pre-configure ZSH.
@@ -20,16 +18,20 @@ A self-contained technology is used to rapidly obtain a development environment.
 
 ```console
 .
-|-- .gitmodules
 |-- README.md
 |-- gitconfig
 |-- install
 |-- install.conf.yaml
 |-- nvim
+|   |-- coc-settings.json
 |   |-- init.vim
 |   `-- plugins
 |       |-- airline.vim
+|       |-- auto-pairs.vim
+|       |-- coc.vim
 |       |-- dracula.vim
+|       |-- floaterm.vim
+|       |-- fugitive.vim
 |       `-- nerdtree.vim
 `-- scripts
     |-- run-setup.sh
