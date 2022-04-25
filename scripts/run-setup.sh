@@ -21,16 +21,25 @@ Linux)
     ) == "Fedora Linux" ]]; then
         echo "Install requirements for Fedora Linux"
         dnf update
-        dnf install -y coreutils git neovim python3-pip curl tree lolcat virtualenv zsh zsh-autosuggestions zsh-syntax-highlighting
+        dnf install -y coreutils curl git neovim nodejs python3-pip tree lolcat virtualenv zsh zsh-autosuggestions zsh-syntax-highlighting
         # TODO: Test if has pip
-        pip3 install pynvim jedi
+        pip3 install pynvim black flake8 isort
         echo "Installation finished"
-    else
-        echo "Install requirements for Linux ..."
-        sudo apt update
-        sudo apt install -y coreutils git git-flow git-core neovim fonts-powerline python3-pip curl tree lolcat virtualenv zsh zsh-autosuggestions zsh-syntax-highlighting
+    elif [[ $(
+        . /etc/os-release
+        echo "$NAME"
+    ) == "Alpine Linux" ]]; then
+        echo "Install requirements for Alpine Linux"
+        apk update
+        apk add coreutils curl git git-flow neovim python3 py3-pip tree zsh zsh-autosuggestions zsh-syntax-highlighting
         # TODO: Test if has pip
-        pip3 install pynvim jedi
+        pip3 install pynvim black flake8 isort
+    else
+        echo "Install requirements for Linux $NAME"
+        sudo apt update
+        sudo apt install -y coreutils git git-flow git-core neovim nodejs fonts-powerline python3-pip curl tree lolcat virtualenv zsh zsh-autosuggestions zsh-syntax-highlighting
+        # TODO: Test if has pip
+        pip3 install pynvim black flake8 isort
 
         sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
         echo "Installation finished."
