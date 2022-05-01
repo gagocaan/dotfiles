@@ -1,54 +1,58 @@
 - defaults:
-      link:
-          relink: true
-      brewfile:
-          - stdout: true,
-      brew:
-          - stderr: False,
-          - stdout: False,
+        link:
+              relink: true
+        brewfile:
+              - stdout: true,
+        brew:
+              - stderr: False,
+              - stdout: False,
 
 - clean: ["~"]
 
 - create:
-      - ~/Workspace
-      - ~/.config
+        - ~/Workspace
+        - ~/.config
 
 - link:
-      ~/.gitconfig: gitconfig
-      ~/.config/nvim: nvim
-
-- shell:
-      - [git submodule update --init --recursive, Installing submodules]
+        ~/.gitconfig: gitconfig
+        ~/.config/nvim: nvim
 
 - ifmacos:
-      # Installs brew if missing
-      - install-brew: true
-      - brew:
-            - black
-            - coreutils
-            - flake8
-            - git-delta
-            - git-flow
-            - go
-            - isort
-            - lolcat
-            - neovim
-            - node
-            - poetry
-            - powerlevel10k
-            - tree
-            - virtualenv
-            - zsh
-            - zsh-autosuggestions
-            - zsh-syntax-highlighting
-      - shell:
-            - command: "pip3 install pynvim"
-              stdin: true
-              stdout: true
-              description: Reading and printing variable
+        # Installs brew if missing
+        - install-brew: true
+        - brew:
+                - black
+                - coreutils
+                - flake8
+                - git-delta
+                - git-flow
+                - go
+                - isort
+                - lolcat
+                - neovim
+                - node
+                - poetry
+                - powerlevel10k
+                - tree
+                - virtualenv
+                - zsh
+                - zsh-autosuggestions
+                - zsh-syntax-highlighting
+        - shell:
+                - command: "pip3 install pynvim"
+                  stdin: true
+                  stdout: true
+                  description: Reading and printing variable
+
+- ifraspbian:
+        - shell:
+                - command: "echo 'Hola mundo'"
+                  stdin: true
+                  stdout: true
+                  description: echo test message
 
 - shell:
-      - [
-            "nvim +PlugUpdate +PlugClean! +UpdateRemotePlugins +qa",
-            Installing and updating plugins,
-        ]
+        - [
+                "nvim +PlugUpdate +PlugClean! +UpdateRemotePlugins +qa",
+                Installing and updating plugins,
+          ]
