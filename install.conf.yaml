@@ -1,6 +1,11 @@
 - defaults:
     link:
       relink: true
+    brewfile:
+      - stdout: true,
+    brew:
+      - stderr: False,
+      - stdout: False,
 
 - clean: ["~"]
 
@@ -13,11 +18,31 @@
     ~/.config/nvim: nvim
 
 - shell:
-    - command: ~/.dotfiles/scripts/run-setup.sh
-      stdin: true
-      stdout: true
-      description: Installing requirements
     - [git submodule update --init --recursive, Installing submodules]
+
+- ifmacos:
+    # Installs brew if missing
+    - install-brew: true
+    - brew:
+        - black
+        - coreutils
+        - flake8
+        - git-delta
+        - git-flow
+        - go
+        - isort
+        - lolcat
+        - neovim
+        - node
+        - poetry
+        - powerlevel10k
+        - tree
+        - virtualenv
+        - zsh
+        - zsh-autosuggestions
+        - zsh-syntax-highlighting
+
+- shell:
     - [
         "nvim +PlugUpdate +PlugClean! +UpdateRemotePlugins +qa",
         Installing and updating plugins,
