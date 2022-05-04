@@ -49,21 +49,28 @@
 
 - ifraspbian:
     - shell:
-        - ["sudo apt update", "Update Package Manager"]
+        - command: "sudo apt update"
+          stdin: true
+          stdout: true
+          description: "Update Package Manager"
+        - command: "sudo apt install -y coreutils git git-flow lolcat neovim nodejs python3-pip tree virtualenv zsh zsh-autosuggestions zsh-syntax-highlighting"
+          stdin: true
+          stdout: true
+          description: "Install packages"
+        - command: "pip3 install black flake8 isort pynvim"
+          stdin: true
+          stdout: true
+          description: "Install Python dependencies"
+        - command: "sudo scripts/install-yarn.sh"
+          stdin: true
+          stdout: true
+          description: "Install yarn"
         - [
-            "sudo apt install -y coreutils git git-flow lolcat neovim nodejs python3-pip tree virtualenv zsh zsh-autosuggestions zsh-syntax-highlighting",
-            "Install packages",
-          ]
-        - [
-            "pip3 install black flake8 isort pynvim",
-            "Install Python dependencies",
+            sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)",
+            "Install Oh My Zsh",
           ]
 
 - shell:
-    - [
-        sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)",
-        "Install Oh My Zsh",
-      ]
     - [
         "nvim +PlugUpdate +PlugClean! +UpdateRemotePlugins +qa",
         Installing and updating plugins,
