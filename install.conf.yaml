@@ -75,7 +75,7 @@
         - command: "scripts/run-setup.sh"
           stdin: true
           stdout: true
-          description: "Setup for Alpine Linux"
+          description: "Setup for Linux"
         - [
             sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)",
             "Install Oh My Zsh",
