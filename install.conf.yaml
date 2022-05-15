@@ -76,6 +76,10 @@
           stdin: true
           stdout: true
           description: "Setup for Linux"
+        - command: "pip3 install black flake8 isort pynvim"
+          stdin: true
+          stdout: true
+          description: "Install Python dependencies"
         - [
             sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)",
             "Install Oh My Zsh",

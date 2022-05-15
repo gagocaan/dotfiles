@@ -1,33 +1,33 @@
 [color]
-    ui = auto
+ui = auto
 [core]
-    editor = nvim
-    pager = delta
+editor = nvim
+pager = delta
 [diff]
-    tool = vimdiff
+tool = vimdiff
 [fetch]
-    prune = true
+prune = true
 [help]
-    autocorrect = 10
+autocorrect = 10
 [push]
-    default = current
+default = current
 [rerere]
-    enabled = true
+enabled = true
 [merge]
-    conflictstyle = diff3
+conflictstyle = diff3
 [interactive]
-    diffFilter = delta --color-only
+diffFilter = delta --color-only
 [delta]
-    line-numbers = true
-    syntax-theme = Dracula
-    plus-style = "syntax #2A363B"
-    plus-emph-style = "syntax #2D4E45"
-    minus-style = "syntax #3B2C37"
-    minus-emph-style = "syntax #613038"
+line-numbers = true
+syntax-theme = Dracula
+plus-style = "syntax #2A363B"
+plus-emph-style = "syntax #2D4E45"
+minus-style = "syntax #3B2C37"
+minus-emph-style = "syntax #613038"
 [pull]
-	rebase = false
+rebase = false
 [init]
-	defaultBranch = develop
+defaultBranch = develop
 [user]
-	name = gagocaan
-	email = gagocaan@gmail.com
+name = gagocaan
+email = gagocaan@gmail.com

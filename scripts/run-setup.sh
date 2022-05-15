@@ -27,7 +27,4 @@ else
     sudo apt autoremove
 fi
 
-python3 -m ensurepip
-pip3 install pynvim black flake8 isort
-
-echo "Installation finished"
+echo "Installation of requirements finished"
