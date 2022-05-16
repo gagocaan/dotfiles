@@ -1,0 +1,10 @@
+[submodule "dotbot"]
+path = dotbot
+url = https://github.com/anishathalye/dotbot
+ignore = dirty
+[submodule "dotbot-brew"]
+path = dotbot-brew
+url = https://github.com/wren/dotbot-brew.git
+[submodule "dotbot-ifplatform"]
+path = dotbot-ifplatform
+url = https://github.com/bejolithic/dotbot-ifplatform.git
