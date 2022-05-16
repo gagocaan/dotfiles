@@ -19,6 +19,10 @@ A self-contained technology is used to rapidly obtain a development environment.
 ```console
 .
 |-- README.md
+|-- TODO
+|-- docs
+|   |-- _config.yml
+|   `-- index.md
 |-- gitconfig
 |-- install
 |-- install.conf.yaml
@@ -34,23 +38,38 @@ A self-contained technology is used to rapidly obtain a development environment.
 |       |-- fugitive.vim
 |       `-- nerdtree.vim
 `-- scripts
+    |-- install-yarn.sh
     |-- run-setup.sh
     `-- welcome.sh
 ```
 
 ## 🏛 Architecture
 
-> 🚧 Under construction ...
+```mermaid
+stateDiagram-v2
+    state OS {
+        state python {
+            state dotbot {
+                [*] --> brew
+                [*] --> ifplatform
+                brew --> [*]
+                ifplatform --> [*]
+            }
+        }
+    }
+    OS --> shell
+```
 
 ## ⚙️ Setup
 
 Make sure your Operating System has the following packages installed.
 
-1. git
+1. bash
 2. curl
-3. Python
+3. git
+4. Python
 
-> Most OS have pre-installed with `[1,2,3]`, just make sure!.
+> Most OS have pre-installed with, just make sure!.
 
 ## 🍴 Usage
 
