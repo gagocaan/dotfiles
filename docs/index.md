@@ -1,37 +1,74 @@
-## Welcome to GitHub Pages
+# dotfiles
 
-You can use the [editor on GitHub](https://github.com/gagocaan/dotfiles/edit/gh-pages/docs/index.md) to maintain and preview the content for your website in Markdown files.
+## 💡 Basic Info
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+**``$HOME``** sweet home
 
-### Markdown
+## 📖 Description
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+A self-contained technology is used to rapidly obtain a development environment.
 
-```markdown
-Syntax highlighted code block
+## 🎯 Summary
 
-# Header 1
-## Header 2
-### Header 3
+* Install and pre-configure ZSH.
+* Install and configure NeoVim to develop in Python. (Also supports other programming languages).
+* Configure git.
 
-- Bulleted
-- List
+## 🧬 Project structure
 
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+```console
+.
+|-- README.md
+|-- gitconfig
+|-- install
+|-- install.conf.yaml
+|-- nvim
+|   |-- coc-settings.json
+|   |-- init.vim
+|   `-- plugins
+|       |-- airline.vim
+|       |-- auto-pairs.vim
+|       |-- coc.vim
+|       |-- dracula.vim
+|       |-- floaterm.vim
+|       |-- fugitive.vim
+|       `-- nerdtree.vim
+`-- scripts
+    |-- run-setup.sh
+    `-- welcome.sh
 ```
 
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
+## 🏛 Architecture
 
-### Jekyll Themes
+> 🚧 Under construction ...
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/gagocaan/dotfiles/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+## ⚙️ Setup
 
-### Support or Contact
+Make sure your Operating System has the following packages installed.
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+1. git
+2. curl
+3. Python
+
+> Most OS have pre-installed with `[1,2,3]`, just make sure!.
+
+## 🍴 Usage
+
+Clone the repository to your `$HOME` directory as `.dotfiles` and then run the installer.
+
+```bash
+# Clone
+cd ~
+git clone https://github.com/gagocaan/dotfiles.git ~/.dotfiles
+
+# Install
+~/.dotfiles/install
+```
+
+## 🔍 Test
+
+> 🚧 Under construction ...
+
+## 🔨 Develop
+
+> 🚧 Under construction ...
