@@ -24,66 +24,28 @@
     # Installs brew if missing
     - install-brew: true
     - brew:
-        - black
         - coreutils
-        - flake8
         - git-delta
         - git-flow
         - go
-        - isort
         - lolcat
         - neovim
         - node
-        - poetry
         - powerlevel10k
         - tree
         - virtualenv
-        - zsh
         - zsh-autosuggestions
         - zsh-syntax-highlighting
     - shell:
-        - command: "pip3 install pynvim"
+        - command: "curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -"
           stdin: true
           stdout: true
-          description: Reading and printing variable
-
-- ifraspbian:
+          description: Installing Poetry
     - shell:
-        - command: "sudo apt update"
+        - command: "pip3 install pynvim black flake8 isort"
           stdin: true
           stdout: true
-          description: "Update Package Manager"
-        - command: "sudo apt install -y coreutils git git-flow lolcat neovim nodejs python3-pip tree virtualenv zsh zsh-autosuggestions zsh-syntax-highlighting"
-          stdin: true
-          stdout: true
-          description: "Install packages"
-        - command: "pip3 install black flake8 isort pynvim"
-          stdin: true
-          stdout: true
-          description: "Install Python dependencies"
-        - command: "sudo scripts/install-yarn.sh"
-          stdin: true
-          stdout: true
-          description: "Install yarn"
-        - [
-            sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)",
-            "Install Oh My Zsh",
-          ]
-
-- ifanylinux:
-    - shell:
-        - command: "scripts/run-setup.sh"
-          stdin: true
-          stdout: true
-          description: "Setup for Linux"
-        - command: "pip3 install black flake8 isort pynvim"
-          stdin: true
-          stdout: true
-          description: "Install Python dependencies"
-        - [
-            sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)",
-            "Install Oh My Zsh",
-          ]
+          description: Installing some essential Python libraries
 
 - shell:
     - [
