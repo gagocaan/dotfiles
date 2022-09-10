@@ -25,7 +25,7 @@ eval "$(pyenv init -)"
 alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
 
 # Poetry
-export PATH="$HOME/.poetry/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 
 # Brew
 export PATH="/usr/local/sbin:$PATH"
