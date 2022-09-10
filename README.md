@@ -38,10 +38,6 @@ A self-contained technology is used to rapidly obtain a development environment.
     `-- welcome.sh
 ```
 
-## 🏛 Architecture
-
-> 🚧 Under construction ...
-
 ## ⚙️ Setup
 
 Make sure your Operating System has the following packages installed.
@@ -56,7 +52,7 @@ Make sure your Operating System has the following packages installed.
 
 Clone the repository to your `$HOME` directory as `.dotfiles` and then run the installer.
 
-```bash
+```zsh
 # Clone
 cd ~
 git clone https://github.com/gagocaan/dotfiles.git ~/.dotfiles
@@ -65,10 +61,14 @@ git clone https://github.com/gagocaan/dotfiles.git ~/.dotfiles
 ~/.dotfiles/install
 ```
 
-## 🔍 Test
+## Uninstall and CleanUp
 
-> 🚧 Under construction ...
-
-## 🔨 Develop
-
-> 🚧 Under construction ...
+```zsh
+# pyenv
+rm -rf $(pyenv root)
+# brew formulas
+brew uninstall --force $(brew list)
+brew autoremove && brew cleanup
+# python libraries
+pip3 freeze | xargs pip3 uninstall -y
+```

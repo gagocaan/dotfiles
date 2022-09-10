@@ -4,7 +4,7 @@
     brewfile:
       - stdout: true,
     brew:
-      - stderr: False,
+      - stderr: True,
       - stdout: False,
 
 - clean: ["~"]
@@ -16,6 +16,7 @@
 - link:
     ~/.gitconfig: gitconfig
     ~/.config/nvim: nvim
+    ~/.zshrc: zshrc
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
@@ -28,16 +29,21 @@
         - git-delta
         - git-flow
         - go
+        - graphviz
+        - htop
         - lolcat
         - neovim
         - node
         - powerlevel10k
+        - pyenv
+        - qlmarkdown
         - tree
         - virtualenv
+        - zsh
         - zsh-autosuggestions
         - zsh-syntax-highlighting
     - shell:
-        - command: "curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -"
+        - command: "curl -sSL https://install.python-poetry.org | python3 -"
           stdin: true
           stdout: true
           description: Installing Poetry

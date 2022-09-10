@@ -1,4 +1,6 @@
-#!/bin/bash -e
+#!/usr/bin/env bash
+
+set -e
 
 sudo apt -y remove cmdtest
 sudo apt -y remove yarn
