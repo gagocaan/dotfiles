@@ -21,4 +21,4 @@ nmap <silent> gv :vsp<CR><Plug>(coc-definition)<C-W>L
 " coc-json: JSON file formatting plugin
 " coc-docker: Dockerfile and docker-compose formatters
 " coc-yaml: Yaml plugin for Kubernetes and terraform files
-let g:coc_global_extensions = ['coc-spell-checker', 'coc-prettier', 'coc-git', 'coc-pyright', 'coc-json', 'coc-docker', 'coc-yaml']
+let g:coc_global_extensions = ['coc-tsserver', 'coc-spell-checker', 'coc-prettier', 'coc-git', 'coc-pyright', 'coc-json', 'coc-docker', 'coc-yaml']

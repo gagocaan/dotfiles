@@ -36,6 +36,7 @@
         - node
         - powerlevel10k
         - pyenv
+        - python
         - qlmarkdown
         - tree
         - virtualenv

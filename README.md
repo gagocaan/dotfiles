@@ -18,24 +18,78 @@ A self-contained technology is used to rapidly obtain a development environment.
 
 ```console
 .
-|-- README.md
-|-- gitconfig
-|-- install
-|-- install.conf.yaml
-|-- nvim
-|   |-- coc-settings.json
-|   |-- init.vim
-|   `-- plugins
-|       |-- airline.vim
-|       |-- auto-pairs.vim
-|       |-- coc.vim
-|       |-- dracula.vim
-|       |-- floaterm.vim
-|       |-- fugitive.vim
-|       `-- nerdtree.vim
-`-- scripts
-    |-- run-setup.sh
-    `-- welcome.sh
+├── Brewfile
+├── README.md
+├── TODO
+├── dotbot
+│   ├── CHANGELOG.md
+│   ├── CONTRIBUTING.md
+│   ├── LICENSE.md
+│   ├── README.md
+│   ├── bin
+│   │   └── dotbot
+│   ├── dotbot
+│   │   ├── cli.py
+│   │   ├── config.py
+│   │   ├── context.py
+│   │   ├── dispatcher.py
+│   │   ├── messenger
+│   │   ├── plugin.py
+│   │   ├── plugins
+│   │   └── util
+│   ├── lib
+│   │   └── pyyaml
+│   ├── setup.cfg
+│   ├── setup.py
+│   ├── test
+│   │   ├── README.md
+│   │   ├── Vagrantfile
+│   │   ├── driver-lib.bash
+│   │   ├── test
+│   │   ├── test-lib.bash
+│   │   └── tests
+│   └── tools
+│       ├── git-submodule
+│       └── hg-subrepo
+├── dotbot-brew
+│   ├── LICENSE
+│   ├── README.md
+│   ├── brew.py
+│   ├── examples
+│   │   ├── linux
+│   │   └── macos
+│   ├── poetry.lock
+│   ├── pyproject.toml
+│   └── test
+├── dotbot-ifplatform
+│   ├── LICENSE
+│   ├── README.md
+│   ├── example
+│   │   └── if.yaml
+│   ├── ifplatform.py
+│   └── lib
+│       └── distro
+├── gitconfig
+├── install
+├── install.conf.yaml
+├── nvim
+│   ├── coc-settings.json
+│   ├── init.vim
+│   └── plugins
+│       ├── airline.vim
+│       ├── auto-pairs.vim
+│       ├── coc.vim
+│       ├── dracula.vim
+│       ├── floaterm.vim
+│       ├── fugitive.vim
+│       └── nerdtree.vim
+├── requirements.txt
+├── scripts
+│   ├── install-yarn.sh
+│   ├── run-setup.sh
+│   ├── uninstall.sh
+│   └── welcome.sh
+└── zshrc
 ```
 
 ## ⚙️ Setup
@@ -52,7 +106,7 @@ Make sure your Operating System has the following packages installed.
 
 Clone the repository to your `$HOME` directory as `.dotfiles` and then run the installer.
 
-```zsh
+```bash
 # Clone
 cd ~
 git clone https://github.com/gagocaan/dotfiles.git ~/.dotfiles
@@ -63,12 +117,17 @@ git clone https://github.com/gagocaan/dotfiles.git ~/.dotfiles
 
 ## Uninstall and CleanUp
 
-```zsh
-# pyenv
-rm -rf $(pyenv root)
-# brew formulas
+```bash
+# Remove Python libraries
+pip3 freeze >requirements.txt # Backup Python dependencies
+pip3 freeze | xargs pip3 uninstall -y
+
+# Remove Brew formulas
+brew bundle dump # Backup formulas
 brew uninstall --force $(brew list)
 brew autoremove && brew cleanup
-# python libraries
-pip3 freeze | xargs pip3 uninstall -y
+
+# Remove Pyenv
+rm -rf $(pyenv root)
+rm -rf ~/.pyenv
 ```
