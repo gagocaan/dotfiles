@@ -25,13 +25,17 @@
     # Installs brew if missing
     - install-brew: true
     - brew:
+        - colima
         - coreutils
+        - docker-compose
         - git-delta
         - git-flow
         - go
         - graphviz
+        - helm
         - htop
         - lolcat
+        - minikube
         - neovim
         - node
         - powerlevel10k

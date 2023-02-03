@@ -37,3 +37,10 @@ fpath+=~/.zfunc
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 ~/.dotfiles/scripts/welcome.sh
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/carlosandresgarzongonzalez/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/carlosandresgarzongonzalez/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/carlosandresgarzongonzalez/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/carlosandresgarzongonzalez/Downloads/google-cloud-sdk/completion.zsh.inc'; fi

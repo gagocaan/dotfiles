@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 set -e
 
@@ -8,6 +8,7 @@ rootTotal=$(df -h $(PWD) | tail -n1 | awk '{printf "%s",$2}')
 memUsed=$(top -l 1 -s 0 | grep PhysMem | awk '{printf "%s", $2}')
 memTotal=$(top -l 1 -s 0 | grep PhysMem | awk '{printf "%s", $6}')
 loadAvg=$(top -l 1 -s 0 | grep Load | awk '{printf "%s %s %s", $3, $4, $5}')
+pythonVersion=$(python --version)
 
 printf "
           _____                    _____          
@@ -35,4 +36,5 @@ printf "
 Carlos Garzon                  $rootUsed/$rootTotal
 Cloud Sofware Developer        $memUsed/$memTotal
 https://github.com/gagocaan   辰$loadAvg
+$pythonVersion
 " | lolcat -t --seed=30 --spread=200

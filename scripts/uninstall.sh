@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 # Remove Python libraries
 pip3 freeze >requirements.txt # Backup Python dependencies
