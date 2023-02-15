@@ -19,47 +19,50 @@
     ~/.zshrc: zshrc
 
 - shell:
-    - [git submodule update --init --recursive, Installing submodules]
+    - command: "brew bundle dump"
+      stdin: true
+      stdout: true
+      description: Backup actual Brew
 
-- ifmacos:
-    # Installs brew if missing
-    - install-brew: true
-    - brew:
-        - colima
-        - coreutils
-        - docker-compose
-        - git-delta
-        - git-flow
-        - go
-        - graphviz
-        - helm
-        - htop
-        - lolcat
-        - minikube
-        - neovim
-        - node
-        - powerlevel10k
-        - pyenv
-        - python
-        - qlmarkdown
-        - tree
-        - virtualenv
-        - zsh
-        - zsh-autosuggestions
-        - zsh-syntax-highlighting
-    - shell:
-        - command: "curl -sSL https://install.python-poetry.org | python3 -"
-          stdin: true
-          stdout: true
-          description: Installing Poetry
-    - shell:
-        - command: "pip3 install pynvim black flake8 isort"
-          stdin: true
-          stdout: true
-          description: Installing some essential Python libraries
+- brew:
+    - colima
+    - coreutils
+    - docker
+    - docker-compose
+    - git-delta
+    - git-flow
+    - go
+    - graphviz
+    - helm
+    - htop
+    - lolcat
+    - minikube
+    - neovim
+    - node
+    - powerlevel10k
+    - pyenv
+    - python
+    - qlmarkdown
+    - tree
+    - virtualenv
+    - zsh
+    - zsh-autosuggestions
+    - zsh-syntax-highlighting
 
 - shell:
-    - [
-        "nvim +PlugUpdate +PlugClean! +UpdateRemotePlugins +qa",
-        Installing and updating plugins,
-      ]
+    - command: "curl -sSL https://install.python-poetry.org | python3 -"
+      stdin: true
+      stdout: true
+      description: Installing Poetry
+
+- shell:
+    - command: "pip3 freeze >requirements.txt"
+      stdin: true
+      stdout: true
+      description: Backup actual Python libraries
+
+- shell:
+    - command: "pip3 install pynvim black flake8 isort"
+      stdin: true
+      stdout: true
+      description: Installing some essential Python libraries

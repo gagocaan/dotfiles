@@ -18,75 +18,25 @@ A self-contained technology is used to rapidly obtain a development environment.
 
 ```console
 .
-├── Brewfile
 ├── README.md
-├── TODO
-├── dotbot
-│   ├── CHANGELOG.md
-│   ├── CONTRIBUTING.md
-│   ├── LICENSE.md
-│   ├── README.md
-│   ├── bin
-│   │   └── dotbot
-│   ├── dotbot
-│   │   ├── cli.py
-│   │   ├── config.py
-│   │   ├── context.py
-│   │   ├── dispatcher.py
-│   │   ├── messenger
-│   │   ├── plugin.py
-│   │   ├── plugins
-│   │   └── util
-│   ├── lib
-│   │   └── pyyaml
-│   ├── setup.cfg
-│   ├── setup.py
-│   ├── test
-│   │   ├── README.md
-│   │   ├── Vagrantfile
-│   │   ├── driver-lib.bash
-│   │   ├── test
-│   │   ├── test-lib.bash
-│   │   └── tests
-│   └── tools
-│       ├── git-submodule
-│       └── hg-subrepo
-├── dotbot-brew
-│   ├── LICENSE
-│   ├── README.md
-│   ├── brew.py
-│   ├── examples
-│   │   ├── linux
-│   │   └── macos
-│   ├── poetry.lock
-│   ├── pyproject.toml
-│   └── test
-├── dotbot-ifplatform
-│   ├── LICENSE
-│   ├── README.md
-│   ├── example
-│   │   └── if.yaml
-│   ├── ifplatform.py
-│   └── lib
-│       └── distro
 ├── gitconfig
 ├── install
 ├── install.conf.yaml
 ├── nvim
-│   ├── coc-settings.json
-│   ├── init.vim
-│   └── plugins
-│       ├── airline.vim
-│       ├── auto-pairs.vim
-│       ├── coc.vim
-│       ├── dracula.vim
-│       ├── floaterm.vim
-│       ├── fugitive.vim
-│       └── nerdtree.vim
-├── requirements.txt
+│   ├── init.lua
+│   ├── lua
+│   │   └── user
+│   │       ├── colorscheme.lua
+│   │       ├── keymap.lua
+│   │       ├── options.lua
+│   │       ├── packer.lua
+│   │       └── plugins
+│   │           ├── float-term.lua
+│   │           ├── lualine.lua
+│   │           └── nvim-tree.lua
+│   └── plugin
+│       └── packer_compiled.lua
 ├── scripts
-│   ├── install-yarn.sh
-│   ├── run-setup.sh
 │   ├── uninstall.sh
 │   └── welcome.sh
 └── zshrc
@@ -121,6 +71,9 @@ git clone https://github.com/gagocaan/dotfiles.git ~/.dotfiles
 # Remove Python libraries
 pip3 freeze >requirements.txt # Backup Python dependencies
 pip3 freeze | xargs pip3 uninstall -y
+
+# Remove Poetry
+curl -sSL https://install.python-poetry.org | python3 - --uninstall
 
 # Remove Brew formulas
 brew bundle dump # Backup formulas
