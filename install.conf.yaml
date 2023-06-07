@@ -22,11 +22,12 @@
     - command: "brew bundle dump"
       stdin: true
       stdout: true
-      description: Backup actual Brew
+      description: Backup current Brew
 
 - brew:
     - colima
     - coreutils
+    - dbeaver-community
     - docker
     - docker-compose
     - git-delta
@@ -39,12 +40,17 @@
     - minikube
     - neovim
     - node
+    - openlens
     - powerlevel10k
     - pyenv
     - python
+    - qemu
     - qlmarkdown
+    - stern
+    - telnet
     - tree
     - virtualenv
+    - warp
     - zsh
     - zsh-autosuggestions
     - zsh-syntax-highlighting
@@ -59,7 +65,7 @@
     - command: "pip3 freeze >requirements.txt"
       stdin: true
       stdout: true
-      description: Backup actual Python libraries
+      description: Backup current Python libraries
 
 - shell:
     - command: "pip3 install pynvim black flake8 isort"

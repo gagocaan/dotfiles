@@ -75,12 +75,21 @@ pip3 freeze | xargs pip3 uninstall -y
 # Remove Poetry
 curl -sSL https://install.python-poetry.org | python3 - --uninstall
 
+# Remove Pyenv
+rm -rf $(pyenv root)
+
 # Remove Brew formulas
 brew bundle dump # Backup formulas
 brew uninstall --force $(brew list)
 brew autoremove && brew cleanup
+```
 
-# Remove Pyenv
-rm -rf $(pyenv root)
-rm -rf ~/.pyenv
+> Comment or remove the lines in your `.zshrc`
+
+```vim
+# Pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
 ```
