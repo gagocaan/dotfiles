@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 set -e
 
@@ -8,7 +8,7 @@ rootTotal=$(df -h $(PWD) | tail -n1 | awk '{printf "%s",$2}')
 memUsed=$(top -l 1 -s 0 | grep PhysMem | awk '{printf "%s", $2}')
 memTotal=$(top -l 1 -s 0 | grep PhysMem | awk '{printf "%s", $6}')
 loadAvg=$(top -l 1 -s 0 | grep Load | awk '{printf "%s %s %s", $3, $4, $5}')
-pythonVersion=$(python --version)
+pythonVersion=$(python3 --version)
 
 printf "
           _____                    _____          

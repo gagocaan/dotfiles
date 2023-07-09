@@ -62,6 +62,12 @@
       description: Installing Poetry
 
 - shell:
+    - command: "poetry config virtualenvs.in-project true"
+      stdin: true
+      stdout: true
+      description: Poetry virtualenvs.in-project true
+
+- shell:
     - command: "pip3 freeze >requirements.txt"
       stdin: true
       stdout: true
