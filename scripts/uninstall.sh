@@ -4,6 +4,8 @@
 pip3 freeze >requirements.txt # Backup Python dependencies
 pip3 freeze | xargs pip3 uninstall -y
 
+pyenv global system # Switch to system python
+
 # Remove Poetry
 curl -sSL https://install.python-poetry.org | python3 - --uninstall
 

@@ -36,6 +36,7 @@
     - graphviz
     - helm
     - htop
+    - kubectl
     - lolcat
     - minikube
     - neovim
@@ -46,6 +47,7 @@
     - python
     - qemu
     - qlmarkdown
+    - rectangle
     - stern
     - telnet
     - tree
