@@ -5,7 +5,7 @@
       - stdout: true,
     brew:
       - stderr: True,
-      - stdout: False,
+      - stdout: True,
 
 - clean: ["~"]
 
@@ -19,7 +19,7 @@
     ~/.zshrc: zshrc
 
 - shell:
-    - command: "brew bundle dump"
+    - command: "brew bundle dump --force"
       stdin: true
       stdout: true
       description: Backup current Brew

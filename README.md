@@ -79,7 +79,7 @@ curl -sSL https://install.python-poetry.org | python3 - --uninstall
 rm -rf $(pyenv root)
 
 # Remove Brew formulas
-brew bundle dump # Backup formulas
+brew bundle dump --force # Backup formulas
 brew uninstall --force $(brew list)
 brew autoremove && brew cleanup
 ```
