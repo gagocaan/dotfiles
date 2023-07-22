@@ -13,8 +13,10 @@ keymap('n', '<Leader>q', ':q<CR>')
 keymap('n', '<Leader>w', ':w<CR>')
 
 -- NERDTree
-keymap('n', '<leader>b', ':NERDTreeFocus<CR>')
-keymap('n', '<C-b>', ':NERDTreeToggle<CR>')
+keymap('n', '<leader>n', ':NvimTreeToggle<CR>')
+keymap('n', '<C-n>', ':NvimTreeFocus<CR>')
+keymap('n', '<C-t>', ':NvimTreeCollapse<CR>')
+keymap('n', '<C-f>', ':NvimTreeFindFile<CR>')
 
 -- Python
-keymap('n', '<leader>f', ':! python3 -m black %; python3 -m isort %<CR>')
+keymap('n', '<leader>l', ':! python3 -m black %; python3 -m isort %<CR>')
