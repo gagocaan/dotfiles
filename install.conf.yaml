@@ -25,7 +25,6 @@
       description: Backup current Brew
 
 - brew:
-    - colima
     - coreutils
     - dbeaver-community
     - docker
@@ -37,11 +36,12 @@
     - helm
     - htop
     - kubectl
+    - kustomize
     - lolcat
-    - minikube
     - neovim
     - node
     - openlens
+    - podman-desktop
     - powerlevel10k
     - pyenv
     - python
