@@ -1,4 +1,6 @@
 .DS_Store
 .vscode
+._*
 Brewfile
+Brewtap
 requirements.txt

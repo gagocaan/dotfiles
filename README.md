@@ -68,28 +68,7 @@ git clone https://github.com/gagocaan/dotfiles.git ~/.dotfiles
 ## Uninstall and CleanUp
 
 ```bash
-# Remove Python libraries
-pip3 freeze >requirements.txt # Backup Python dependencies
-pip3 freeze | xargs pip3 uninstall -y
-
-# Remove Poetry
-curl -sSL https://install.python-poetry.org | python3 - --uninstall
-
-# Remove Pyenv
-rm -rf $(pyenv root)
-
-# Remove Brew formulas
-brew bundle dump --force # Backup formulas
-brew uninstall --force $(brew list)
-brew autoremove && brew cleanup
+~/.dotfiles/scripts/uninstall.sh
 ```
 
-> Comment or remove the lines in your `.zshrc`
-
-```vim
-# Pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
-```
+**Reboot your system for avoiding conflicts.**

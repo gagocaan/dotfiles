@@ -25,6 +25,7 @@
       description: Backup current Brew
 
 - brew:
+    - colima
     - coreutils
     - dbeaver-community
     - docker
@@ -41,13 +42,12 @@
     - neovim
     - node
     - openlens
-    - podman-desktop
-    - powerlevel10k
     - pyenv
     - python
     - qemu
     - qlmarkdown
     - rectangle
+    - romkatv/powerlevel10k/powerlevel10k
     - stern
     - telnet
     - tree
