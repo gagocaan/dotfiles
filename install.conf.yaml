@@ -14,8 +14,8 @@
     - ~/.config
 
 - link:
+    ~/.config/starship.toml: starship.toml
     ~/.gitconfig: gitconfig
-    ~/.config/nvim: nvim
     ~/.zshrc: zshrc
 
 - shell:
@@ -25,37 +25,49 @@
       description: Backup current Brew
 
 - brew:
+    - autodesk-fusion360
     - colima
     - coreutils
     - dbeaver-community
     - docker
     - docker-compose
+    - fanny
     - git-delta
     - git-flow
     - go
     - graphviz
     - helm
     - htop
+    - jq
     - kubectl
     - kustomize
     - lolcat
+    - mockoon
     - neovim
     - node
+    - openlens
     - openlens
     - pyenv
     - python
     - qemu
     - qlmarkdown
     - rectangle
-    - romkatv/powerlevel10k/powerlevel10k
+    - starship
     - stern
+    - syntax-highlight
     - telnet
+    - terraform
     - tree
     - virtualenv
     - warp
-    - zsh
     - zsh-autosuggestions
     - zsh-syntax-highlighting
+
+- shell:
+    - command: "git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 && nvim"
+      stdin: true
+      stdout: true
+      description: Installing NvChad
 
 - shell:
     - command: "curl -sSL https://install.python-poetry.org | python3 -"

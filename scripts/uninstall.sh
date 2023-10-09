@@ -6,6 +6,7 @@ pip3 freeze | xargs pip3 uninstall -y
 
 pyenv shell system  # Switch to system python
 pyenv global system # Switch to system python
+PYENV_ROOT=$(pyenv root)
 source $HOME/.zshrc # Reload the source
 
 # Remove Poetry
@@ -26,5 +27,5 @@ sed -i '' 's/\(^eval "$(pyenv init -)"$\)/#\1/' $HOME/.dotfiles/zshrc
 sed -i '' 's/\(^alias brew=.*\)/#\1/' $HOME/.dotfiles/zshrc
 
 # Remove Pyenv
-rm -rf $(pyenv root)
+rm -rf PYENV_ROOT
 rm -rf ~/.pyenv
