@@ -22,23 +22,9 @@ A self-contained technology is used to rapidly obtain a development environment.
 ├── gitconfig
 ├── install
 ├── install.conf.yaml
-├── nvim
-│   ├── init.lua
-│   ├── lua
-│   │   └── user
-│   │       ├── colorscheme.lua
-│   │       ├── keymap.lua
-│   │       ├── options.lua
-│   │       ├── packer.lua
-│   │       └── plugins
-│   │           ├── float-term.lua
-│   │           ├── lualine.lua
-│   │           └── nvim-tree.lua
-│   └── plugin
-│       └── packer_compiled.lua
 ├── scripts
-│   ├── uninstall.sh
-│   └── welcome.sh
+│   └── uninstall.sh
+├── starship.toml
 └── zshrc
 ```
 
@@ -50,7 +36,7 @@ Make sure your Operating System has the following packages installed.
 2. curl
 3. Python
 
-> Most OS have pre-installed with `[1,2,3]`, just make sure!.
+> Most operating systems have these components installed, just make sure you have them!
 
 ## 🍴 Usage
 

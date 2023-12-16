@@ -25,13 +25,15 @@
       description: Backup current Brew
 
 - brew:
+    - android-platform-tools
     - autodesk-fusion360
+    - balenaetcher
     - colima
     - coreutils
     - dbeaver-community
     - docker
+    - docker-buildx
     - docker-compose
-    - fanny
     - git-delta
     - git-flow
     - go
@@ -45,7 +47,6 @@
     - mockoon
     - neovim
     - node
-    - openlens
     - openlens
     - pyenv
     - python
