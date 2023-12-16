@@ -18,6 +18,11 @@
     ~/.gitconfig: gitconfig
     ~/.zshrc: zshrc
 
+- tap:
+    - hashicorp/tap
+    - homebrew/bundle
+    - homebrew/services
+
 - shell:
     - command: "brew bundle dump --force"
       stdin: true
