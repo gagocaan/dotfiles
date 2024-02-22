@@ -19,9 +19,12 @@
     ~/.zshrc: zshrc
 
 - tap:
+    - fluxcd/tap
     - hashicorp/tap
     - homebrew/bundle
+    - homebrew/cask-fonts
     - homebrew/services
+    - weaveworks/tap
 
 - shell:
     - command: "brew bundle dump --force"
@@ -31,6 +34,7 @@
 
 - brew:
     - android-platform-tools
+    - aptakube
     - autodesk-fusion360
     - balenaetcher
     - colima
@@ -44,6 +48,7 @@
     - go
     - graphviz
     - helm
+    - hot
     - htop
     - jq
     - kubectl
@@ -94,7 +99,7 @@
       description: Backup current Python libraries
 
 - shell:
-    - command: "pip3 install pynvim black flake8 isort"
+    - command: "pip3 install pynvim ruff"
       stdin: true
       stdout: true
       description: Installing some essential Python libraries
