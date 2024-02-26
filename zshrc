@@ -15,6 +15,10 @@ export PATH="$HOME/.local/bin:$PATH"
 # Brew
 export PATH="/usr/local/sbin:$PATH"
 
+# Go
+export GOPATH="$HOME/go"
+export PATH=$PATH:$GOPATH/bin
+
 autoload -Uz compinit
 zstyle ':completion:*' menu select
 fpath+=~/.zfunc

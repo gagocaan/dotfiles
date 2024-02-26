@@ -1,8 +1,10 @@
 #!/bin/zsh
 
+set -e
+
 # Remove Python libraries
-pip3 freeze >requirements.txt # Backup Python dependencies
-pip3 freeze | xargs pip3 uninstall -y
+pip3 freeze --exclude wheel >requirements.txt # Backup Python dependencies
+pip3 freeze --exclude wheel | xargs pip3 uninstall -y --break-system-packages
 
 pyenv shell system  # Switch to system python
 pyenv global system # Switch to system python
@@ -27,5 +29,5 @@ sed -i '' 's/\(^eval "$(pyenv init -)"$\)/#\1/' $HOME/.dotfiles/zshrc
 sed -i '' 's/\(^alias brew=.*\)/#\1/' $HOME/.dotfiles/zshrc
 
 # Remove Pyenv
-rm -rf PYENV_ROOT
+rm -rf $PYENV_ROOT
 rm -rf ~/.pyenv

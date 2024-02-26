@@ -34,7 +34,6 @@
 
 - brew:
     - android-platform-tools
-    - aptakube
     - autodesk-fusion360
     - balenaetcher
     - colima
@@ -54,7 +53,6 @@
     - kubectl
     - kustomize
     - lolcat
-    - mockoon
     - neovim
     - node
     - openlens
@@ -99,7 +97,7 @@
       description: Backup current Python libraries
 
 - shell:
-    - command: "pip3 install pynvim ruff"
+    - command: "pip3 install pynvim ruff --break-system-packages"
       stdin: true
       stdout: true
       description: Installing some essential Python libraries
