@@ -1,8 +1,6 @@
 - defaults:
     link:
       relink: true
-    brewfile:
-      - stdout: true,
     brew:
       - stderr: True,
       - stdout: True,
@@ -28,8 +26,8 @@
 
 - shell:
     - command: "brew bundle dump --force"
-      stdin: true
-      stdout: true
+      stderr: True,
+      stdout: True,
       description: Backup current Brew
 
 - brew:
@@ -73,31 +71,31 @@
     - zsh-syntax-highlighting
 
 - shell:
-    - command: "git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 && nvim"
-      stdin: true
-      stdout: true
+    - command: "if [ -d '~/.config/nvim' ]; then git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 && nvim; fi"
+      stderr: True,
+      stdout: True,
       description: Installing NvChad
 
 - shell:
     - command: "curl -sSL https://install.python-poetry.org | python3 -"
-      stdin: true
-      stdout: true
+      stderr: True,
+      stdout: True,
       description: Installing Poetry
 
 - shell:
     - command: "poetry config virtualenvs.in-project true"
-      stdin: true
-      stdout: true
+      stderr: True,
+      stdout: True,
       description: Poetry virtualenvs.in-project true
 
 - shell:
     - command: "pip3 freeze >requirements.txt"
-      stdin: true
-      stdout: true
+      stderr: True,
+      stdout: True,
       description: Backup current Python libraries
 
 - shell:
     - command: "pip3 install pynvim ruff --break-system-packages"
-      stdin: true
-      stdout: true
+      stderr: True,
+      stdout: True,
       description: Installing some essential Python libraries
