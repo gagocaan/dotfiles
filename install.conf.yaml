@@ -71,6 +71,12 @@
     - zsh-syntax-highlighting
 
 - shell:
+    - command: "brew search '/font-.*-nerd-font/' | awk '{ print $1 }' | xargs -I{} brew install --cask {} || true"
+      stderr: True,
+      stdout: True,
+      description: Nerd Fonts for your IDE
+
+- shell:
     - command: "if [ -d '~/.config/nvim' ]; then git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 && nvim; fi"
       stderr: True,
       stdout: True,
