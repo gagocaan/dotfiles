@@ -12,7 +12,7 @@ PYENV_ROOT=$(pyenv root)
 source $HOME/.zshrc # Reload the source
 
 # Remove Poetry
-curl -sSL https://install.python-poetry.org | python3 - --uninstall
+pipx uninstall poetry
 
 # Remove Brew formulas
 brew bundle dump --force # Backup formulas

@@ -16,6 +16,12 @@
     ~/.gitconfig: gitconfig
     ~/.zshrc: zshrc
 
+- shell:
+    - command: "brew bundle dump --force"
+      stderr: True,
+      stdout: True,
+      description: Backup current Brew
+
 - tap:
     - fluxcd/tap
     - hashicorp/tap
@@ -24,19 +30,9 @@
     - homebrew/services
     - weaveworks/tap
 
-- shell:
-    - command: "brew bundle dump --force"
-      stderr: True,
-      stdout: True,
-      description: Backup current Brew
-
 - brew:
-    - android-platform-tools
-    - autodesk-fusion360
-    - balenaetcher
     - colima
     - coreutils
-    - dbeaver-community
     - docker
     - docker-buildx
     - docker-compose
@@ -53,54 +49,66 @@
     - lolcat
     - neovim
     - node
-    - openlens
+    - pipx
     - pyenv
     - python
     - qemu
-    - qlmarkdown
-    - rectangle
     - starship
     - stern
-    - syntax-highlight
     - telnet
     - terraform
     - tree
     - virtualenv
-    - warp
     - zsh-autosuggestions
     - zsh-syntax-highlighting
 
+- cask:
+    - android-platform-tools
+    - autodesk-fusion360
+    - balenaetcher
+    - dbeaver-community
+    - openlens
+    - qlmarkdown
+    - rectangle
+    - syntax-highlight
+    - warp
+
 - shell:
-    - command: "brew search '/font-.*-nerd-font/' | awk '{ print $1 }' | xargs -I{} brew install --cask {} || true"
+    - command: "brew search '/font-meslo-lg-nerd-font/' | awk '{ print $1 }' | xargs -I{} brew install --cask {} || true"
       stderr: True,
       stdout: True,
       description: Nerd Fonts for your IDE
 
-- shell:
     - command: "if [ -d '~/.config/nvim' ]; then git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 && nvim; fi"
       stderr: True,
       stdout: True,
       description: Installing NvChad
 
-- shell:
-    - command: "curl -sSL https://install.python-poetry.org | python3 -"
+    - command: "pipx ensurepath"
       stderr: True,
       stdout: True,
-      description: Installing Poetry
+      description: Ensure PATH
 
-- shell:
+    - command: "sudo pipx ensurepath --global"
+      stderr: True,
+      stdout: True,
+      description: optional to allow pipx actions in global scope
+
+    - command: "pipx install poetry"
+      stderr: True,
+      stdout: True,
+      description: Install Python Poetry
+
     - command: "poetry config virtualenvs.in-project true"
       stderr: True,
       stdout: True,
       description: Poetry virtualenvs.in-project true
 
-- shell:
     - command: "pip3 freeze >requirements.txt"
       stderr: True,
       stdout: True,
       description: Backup current Python libraries
 
-- shell:
     - command: "pip3 install pynvim ruff --break-system-packages"
       stderr: True,
       stdout: True,
