@@ -84,15 +84,10 @@
       stdout: True,
       description: Installing NvChad
 
-    - command: "pipx ensurepath"
+    - command: "pipx ensurepath --force"
       stderr: True,
       stdout: True,
       description: Ensure PATH
-
-    - command: "sudo pipx ensurepath --global"
-      stderr: True,
-      stdout: True,
-      description: optional to allow pipx actions in global scope
 
     - command: "pipx install poetry"
       stderr: True,
