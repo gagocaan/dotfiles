@@ -79,7 +79,7 @@
       stdout: True,
       description: Nerd Fonts for your IDE
 
-    - command: "git clone https://github.com/NvChad/starter ~/.config/nvim && nvim"
+    - command: "if [ -d '~/.config/nvim' ]; then git clone https://github.com/NvChad/starter ~/.config/nvim && nvim; fi"
       stderr: True,
       stdout: True,
       description: Installing NvChad
