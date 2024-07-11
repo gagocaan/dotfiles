@@ -26,7 +26,6 @@
     - fluxcd/tap
     - hashicorp/tap
     - homebrew/bundle
-    - homebrew/cask-fonts
     - homebrew/services
     - weaveworks/tap
 

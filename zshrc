@@ -24,3 +24,6 @@ zstyle ':completion:*' menu select
 fpath+=~/.zfunc
 
 eval "$(starship init zsh)"
+
+# Created by `pipx` on 2024-07-11 11:33:13
+export PATH="$PATH:/Users/carlosandresgarzongonzalez/.local/bin"
