@@ -55,7 +55,7 @@
     - starship
     - stern
     - telnet
-    - terraform
+    - hashicorp/tap/terraform
     - tree
     - virtualenv
     - zsh-autosuggestions
