@@ -27,21 +27,24 @@
     - hashicorp/tap
     - homebrew/bundle
     - homebrew/services
+    - infisical/get-cli
     - weaveworks/tap
 
 - brew:
-    - colima
     - coreutils
     - docker
     - docker-buildx
     - docker-compose
+    - fluxcd/tap/flux
     - git-delta
     - git-flow
     - go
     - graphviz
+    - hashicorp/tap/terraform
     - helm
     - hot
     - htop
+    - infisical/get-cli/infisical
     - jq
     - kubectl
     - kustomize
@@ -49,13 +52,13 @@
     - neovim
     - node
     - pipx
+    - protobuf
     - pyenv
     - python
-    - qemu
     - starship
     - stern
     - telnet
-    - hashicorp/tap/terraform
+    - terraform-docs
     - tree
     - virtualenv
     - zsh-autosuggestions
@@ -63,10 +66,12 @@
 
 - cask:
     - android-platform-tools
-    - autodesk-fusion360
+    - appcleaner
     - balenaetcher
     - dbeaver-community
+    - hot
     - openlens
+    - orbstack
     - qlmarkdown
     - rectangle
     - syntax-highlight
