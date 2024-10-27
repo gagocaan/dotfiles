@@ -60,6 +60,7 @@
     - telnet
     - terraform-docs
     - tree
+    - uv
     - virtualenv
     - zsh-autosuggestions
     - zsh-syntax-highlighting
@@ -93,22 +94,7 @@
       stdout: True,
       description: Ensure PATH
 
-    - command: "pipx install poetry"
-      stderr: True,
-      stdout: True,
-      description: Install Python Poetry
-
-    - command: "poetry config virtualenvs.in-project true"
-      stderr: True,
-      stdout: True,
-      description: Poetry virtualenvs.in-project true
-
-    - command: "pip3 freeze >requirements.txt"
-      stderr: True,
-      stdout: True,
-      description: Backup current Python libraries
-
-    - command: "pip3 install pynvim ruff --break-system-packages"
+    - command: "uv tool install ruff"
       stderr: True,
       stdout: True,
       description: Installing some essential Python libraries
