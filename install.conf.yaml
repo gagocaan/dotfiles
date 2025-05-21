@@ -31,11 +31,13 @@
     - weaveworks/tap
 
 - brew:
+    - bottom
     - coreutils
     - docker
     - docker-buildx
     - docker-compose
     - fluxcd/tap/flux
+    - gh
     - git-delta
     - git-flow
     - go
@@ -48,6 +50,7 @@
     - jq
     - kubectl
     - kustomize
+    - lazygit
     - lolcat
     - neovim
     - node
@@ -70,7 +73,6 @@
     - appcleaner
     - balenaetcher
     - dbeaver-community
-    - hot
     - openlens
     - orbstack
     - qlmarkdown
@@ -84,7 +86,7 @@
       stdout: True,
       description: Nerd Fonts for your IDE
 
-    - command: "if [ -d '~/.config/nvim' ]; then git clone https://github.com/NvChad/starter ~/.config/nvim && nvim; fi"
+    - command: "if [ ! -d \"$HOME/.config/nvim\" ]; then git clone https://github.com/NvChad/starter \"$HOME/.config/nvim\"; else echo \"NvChad already installed at ~/.config/nvim. Skipping installation.\"; fi"
       stderr: True,
       stdout: True,
       description: Installing NvChad
