@@ -1,92 +1,46 @@
 # Timeout for commands executed by starship (in milliseconds).
 command_timeout = 5000
 
-[aws]
-symbol = "  "
+# --- Structure & Format (Powerline Style) ---
+format = """
+[░▒▓](color_yellow)\\n$os\\n$username
+[](bg:color_orange fg:color_yellow)
+$directory
+[](fg:color_orange bg:color_blue)
+$git_branch
+$git_status
+[](fg:color_blue bg:color_purple)
+$python
+$nodejs
+$golang
+$rust
+$terraform
+[](fg:color_purple bg:color_cyan)
+$kubernetes
+$aws
+$docker_context
+[](fg:color_cyan)
+$line_break
+$character"""
 
-[buf]
-symbol = " "
+right_format = """$cmd_duration"""
 
-[c]
-symbol = " "
+# --- Palette Customization ---
+[palettes.catppuccin_mocha]
+color_yellow = "#F9E2AF"
+color_orange = "#FAB387"
+color_blue = "#89B4FA"
+color_purple = "#CBA6F7"
+color_cyan = "#94E2D5"
+color_green = "#A6E3A1"
+color_red = "#F38BA8"
+color_bg = "#1e1e2e"
 
-[conda]
-symbol = " "
+# --- Module Configuration ---
 
-[crystal]
-symbol = " "
-
-[dart]
-symbol = " "
-
-[directory]
-read_only = " 󰌾"
-
-[docker_context]
-symbol = " "
-
-[elixir]
-symbol = " "
-
-[elm]
-symbol = " "
-
-[fennel]
-symbol = " "
-
-[fossil_branch]
-symbol = " "
-
-[git_branch]
-symbol = " "
-
-[golang]
-symbol = " "
-
-[guix_shell]
-symbol = " "
-
-[haskell]
-symbol = " "
-
-[haxe]
-symbol = " "
-
-[hg_branch]
-symbol = " "
-
-[hostname]
-ssh_symbol = " "
-
-[java]
-symbol = " "
-
-[julia]
-symbol = " "
-
-[kotlin]
-symbol = " "
-
-[lua]
-symbol = " "
-
-[memory_usage]
-symbol = "󰍛 "
-
-[meson]
-symbol = "󰔷 "
-
-[nim]
-symbol = "󰆥 "
-
-[nix_shell]
-symbol = " "
-
-[nodejs]
-symbol = " "
-
-[ocaml]
-symbol = " "
+[os]
+disabled = false
+style = "bg:color_yellow fg:black"
 
 [os.symbols]
 Alpaquita = " "
@@ -133,6 +87,157 @@ Unknown = " "
 Void = " "
 Windows = "󰍲 "
 
+[username]
+show_always = true
+style_user = "bg:color_yellow fg:black"
+format = "[$user]($style)"
+
+[directory]
+style = "bg:color_orange fg:black"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+read_only = " 󰌾"
+
+[git_branch]
+symbol = ""
+style = "bg:color_blue fg:black"
+format = "[[ $symbol $branch ]($style)]($style)"
+
+[git_status]
+style = "bg:color_blue fg:black"
+format = "[[($all_status$ahead_behind )]($style)]($style)"
+conflicted = "🏳"
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+untracked = "󰇘"
+stashed = "📦"
+modified = "📝"
+staged = "✅"
+renamed = "🚚"
+deleted = "🗑"
+
+[python]
+symbol = ""
+style = "bg:color_purple fg:black"
+format = "[[ $symbol ($virtualenv) ]($style)]($style)"
+
+[nodejs]
+symbol = ""
+style = "bg:color_purple fg:black"
+format = "[[ $symbol ($version) ]($style)]($style)"
+
+[golang]
+symbol = ""
+style = "bg:color_purple fg:black"
+format = "[[ $symbol ($version) ]($style)]($style)"
+
+[rust]
+symbol = ""
+style = "bg:color_purple fg:black"
+format = "[[ $symbol ($version) ]($style)]($style)"
+
+[terraform]
+symbol = "󱁢"
+style = "bg:color_purple fg:black"
+format = "[[ $symbol ($workspace) ]($style)]($style)"
+
+[kubernetes]
+symbol = "󱃾"
+disabled = false
+style = "bg:color_cyan fg:black"
+format = "[[ $symbol $context( \($namespace\)) ]($style)]($style)"
+
+[aws]
+symbol = ""
+style = "bg:color_cyan fg:black"
+format = "[[ $symbol ($profile) ]($style)]($style)"
+
+[docker_context]
+symbol = " "
+style = "bg:color_cyan fg:black"
+format = "[[ $symbol $context ]($style)]($style)"
+
+[character]
+success_symbol = "[➜](bold green)"
+error_symbol = "[➜](bold red)"
+
+[cmd_duration]
+min_time = 500
+format = "󱎫 [$duration]($style)"
+style = "yellow italic"
+
+# --- Language Symbols (Legacy support) ---
+[buf]
+symbol = " "
+
+[c]
+symbol = " "
+
+[conda]
+symbol = " "
+
+[crystal]
+symbol = " "
+
+[dart]
+symbol = " "
+
+[elixir]
+symbol = " "
+
+[elm]
+symbol = " "
+
+[fennel]
+symbol = " "
+
+[fossil_branch]
+symbol = " "
+
+[guix_shell]
+symbol = " "
+
+[haskell]
+symbol = " "
+
+[haxe]
+symbol = " "
+
+[hg_branch]
+symbol = " "
+
+[hostname]
+ssh_symbol = " "
+
+[java]
+symbol = " "
+
+[julia]
+symbol = " "
+
+[kotlin]
+symbol = " "
+
+[lua]
+symbol = " "
+
+[memory_usage]
+symbol = "󰍛 "
+
+[meson]
+symbol = "󰔷 "
+
+[nim]
+symbol = "󰆥 "
+
+[nix_shell]
+symbol = " "
+
+[ocaml]
+symbol = " "
+
 [package]
 symbol = "󰏗 "
 
@@ -145,17 +250,11 @@ symbol = " "
 [pijul_channel]
 symbol = " "
 
-[python]
-symbol = " "
-
 [rlang]
 symbol = "󰟔 "
 
 [ruby]
 symbol = " "
-
-[rust]
-symbol = " "
 
 [scala]
 symbol = " "

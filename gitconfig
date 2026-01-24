@@ -1,33 +1,77 @@
-[color]
-ui = auto
-[core]
-editor = nvim
-pager = delta
-[diff]
-tool = vimdiff
-[fetch]
-prune = true
-[help]
-autocorrect = 10
-[push]
-default = current
-[rerere]
-enabled = true
-[merge]
-conflictstyle = diff3
-[interactive]
-diffFilter = delta --color-only
-[delta]
-line-numbers = true
-syntax-theme = Dracula
-plus-style = "syntax #2A363B"
-plus-emph-style = "syntax #2D4E45"
-minus-style = "syntax #3B2C37"
-minus-emph-style = "syntax #613038"
-[pull]
-rebase = false
-[init]
-defaultBranch = develop
 [user]
-name = gagocaan
-email = gagocaan@gmail.com
+    name = gagocaan
+    email = gagocaan@gmail.com
+    # signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5... (Poner tu llave publica aqui)
+
+[commit]
+    # gpgsign = true # Descomentar para firmar commits automaticamente
+
+[gpg]
+    format = ssh
+
+[core]
+    editor = nvim
+    pager = delta
+    ignorecase = false
+    fsmonitor = true # Mejora performance en repos grandes
+    untrackedCache = true
+
+[init]
+    defaultBranch = main
+
+[fetch]
+    prune = true
+    pruneTags = true
+
+[pull]
+    rebase = true
+
+[push]
+    autoSetupRemote = true
+    default = current
+    followTags = true
+
+[merge]
+    conflictstyle = zdiff3
+
+[diff]
+    colorMoved = default
+    algorithm = histogram
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true    # use n and N to move between diff sections
+    line-numbers = true
+    side-by-side = false
+    syntax-theme = Dracula
+    plus-style = "syntax #012800"
+    minus-style = "syntax #340001"
+
+[branch]
+    sort = -committerdate
+
+[column]
+    ui = auto
+
+[rerere]
+    enabled = true
+
+[help]
+    autocorrect = 10
+
+[alias]
+    st = status
+    co = checkout
+    br = branch
+    ci = commit
+    aa = add --all
+    df = diff
+    dc = diff --cached
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    lga = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all
+    unstage = reset HEAD --
+    last = log -1 HEAD
+    undo = reset HEAD~1 --mixed
+    amend = commit --amend

@@ -25,60 +25,53 @@
 - tap:
     - fluxcd/tap
     - hashicorp/tap
-    - homebrew/bundle
     - homebrew/services
     - infisical/get-cli
     - weaveworks/tap
 
 - brew:
+    # Core Modern Tools (Rust-based)
+    - mise
+    - uv
+    - zoxide
+    - eza
+    - bat
+    - fzf
+    - ripgrep
+    - fd
+    - atuin
+    - zellij
+    # System & Monitoring
     - bottom
     - coreutils
+    - htop
+    - tree
+    - jq
+    # Containers & Orchestration
     - docker
     - docker-buildx
     - docker-compose
+    - kubernetes-cli
+    - kustomize
+    - helm
     - fluxcd/tap/flux
+    - k9s
+    - stern
+    # Dev Tools
     - gh
     - git-delta
     - git-flow
-    - go
-    - graphviz
-    - hashicorp/tap/terraform
-    - helm
-    - hot
-    - htop
-    - infisical/get-cli/infisical
-    - jq
-    - kubectl
-    - kustomize
     - lazygit
-    - lolcat
     - neovim
-    - node
-    - pipx
-    - protobuf
-    - pyenv
-    - python
     - starship
-    - stern
-    - telnet
-    - terraform-docs
-    - tree
-    - uv
-    - virtualenv
-    - zsh-autosuggestions
-    - zsh-syntax-highlighting
 
 - cask:
-    - android-platform-tools
-    - appcleaner
-    - balenaetcher
-    - dbeaver-community
-    - openlens
-    - orbstack
-    - qlmarkdown
-    - rectangle
-    - syntax-highlight
+    - ghostty
     - warp
+    - rectangle
+    - orbstack
+    - dbeaver-community
+    - appcleaner
 
 - shell:
     - command: "brew search '/font-meslo-lg-nerd-font/' | awk '{ print $1 }' | xargs -I{} brew install --cask {} || true"
@@ -86,17 +79,12 @@
       stdout: True,
       description: Nerd Fonts for your IDE
 
-    - command: "if [ ! -d \"$HOME/.config/nvim\" ]; then git clone https://github.com/NvChad/starter \"$HOME/.config/nvim\"; else echo \"NvChad already installed at ~/.config/nvim. Skipping installation.\"; fi"
+    - command: "if [ ! -d \"$HOME/.config/nvim\" ]; then git clone https://github.com/LazyVim/starter \"$HOME/.config/nvim\"; else echo \"Neovim config already exists. Skipping LazyVim auto-install.\"; fi"
       stderr: True,
       stdout: True,
-      description: Installing NvChad
+      description: Installing LazyVim
 
-    - command: "pipx ensurepath --force"
+    - command: "mise install -y"
       stderr: True,
       stdout: True,
-      description: Ensure PATH
-
-    - command: "uv tool install ruff"
-      stderr: True,
-      stdout: True,
-      description: Installing some essential Python libraries
+      description: Install languages via mise
