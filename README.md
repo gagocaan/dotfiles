@@ -1,83 +1,144 @@
-# dotfiles
+# Dotfiles
 
 ## 💡 Basic Info
 
-**``$HOME``** sweet home. A modern, high-performance development environment for macOS (2026 Edition).
+`$HOME` sweet home. A modern, high-performance development environment for macOS (**2026 Edition**).
 
 ## 📖 Description
 
-A self-contained, automated setup to rapidly deploy a cutting-edge development environment featuring the latest Rust-based CLI tools, a polyglot version manager, and a fully configured Neovim IDE.
+A self-contained, automated setup to rapidly deploy a cutting-edge development environment. This stack prioritizes Rust-based CLI tools, a unified polyglot version manager, and a cloud-native workflow optimized for DevOps and Cloud Cost Analysis.
 
 ## 🎯 Summary
 
-* **Shell**: ZSH with [Starship](https://starship.rs/) prompt, [zoxide](https://github.com/ajeetdsouza/zoxide) navigation, and [Atuin](https://github.com/atuinsh/atuin) history.
-* **Core Utils**: Modern replacements for standard tools (`eza` > ls, `bat` > cat, `ripgrep` > grep, `fd` > find).
-* **Package Management**:
-    * **[mise](https://mise.jdx.dev/)**: Single source of truth for runtime versions (Node, Go, Terraform, Python). Replaces `nvm`, `pyenv`, `go` brew formulas.
-    * **[uv](https://github.com/astral-sh/uv)**: Blazing fast Python package and project manager. Replaces `pip`, `pip-tools`, `pipx`, `virtualenv`.
-* **Editor**: [LazyVim](https://www.lazyvim.org/) (Neovim) pre-configured for Python, Go, and Web Development.
-* **Terminal**: [Ghostty](https://ghostty.org/) (GPU-accelerated) + [Zellij](https://zellij.dev/) (Multiplexer).
-* **DevOps**: Docker (via OrbStack), K9s, Flux, Helm.
+- **Shell & Prompt**: [ZSH](https://www.zsh.org/) with [Starship](https://starship.rs/) (K8s & Terraform aware), [zoxide](https://github.com/ajeetdsouza/zoxide) for smart navigation, and [Atuin](https://atuin.sh/) for synced, searchable history.
+- **Terminal**: [Warp](https://www.warp.dev/) (AI-integrated) + [Zellij](https://zellij.dev/) for high-productivity multiplexing.
+- **Core Utils (The Rust Stack)**: Modern replacements for legacy tools:
+  - `eza` > `ls`
+  - `bat` > `cat`
+  - `ripgrep` > `grep`
+  - `fd` > `find`
+  - `bottom` > `top`
+- **Package Management**:
+  - **[mise](https://mise.jdx.dev/)**: Single source of truth for runtime versions (Node, Go, Terraform, Python). Eliminates version manager sprawl.
+  - **[uv](https://docs.astral.sh/uv/)**: Blazing fast Python project manager. Replaces pip, pipx, and virtualenv.
+- **Editor**: [LazyVim](https://www.lazyvim.org/) (Neovim) optimized for performance and modern LSP features.
+- **DevOps & Cloud**: OrbStack (Docker/K8s), K9s, FluxCD, Helm, and Terraform-docs.
 
-### ✨ Git Supercharged
-The `.gitconfig` comes with modern defaults and productivity aliases:
-* **Workflow**: Auto-setup remote tracking on push, rebase by default on pull, and `zdiff3` conflict style.
-* **Visuals**: Uses `delta` for syntax-highlighted diffs with navigation (`n`/`N`).
-* **Aliases**:
-    * `git lg`: Beautiful graph log.
-    * `git st`: Short status.
-    * `git undo`: Soft reset last commit.
-    * `git amend`: Quick amend.
+## ✨ Git & Workflow
 
-## 🧬 Project structure
+The `.gitconfig` is tuned for professional collaboration:
 
-```console
+- **git-flow**: Integrated and pre-configured for `main`/`develop` branches.
+- **Visuals**: [Delta](https://github.com/dandavison/delta) for side-by-side, syntax-highlighted diffs.
+- **Productivity Aliases**:
+  - `git ifi`: Initialize git-flow instantly with defaults.
+  - `git gone`: Prune local branches that no longer exist on remote.
+  - `git lg`: Professional graph visualization of the commit history.
+
+## 🧬 Project Structure
+
+```text
 .
 ├── README.md
-├── gitconfig
-├── install
-├── install.conf.yaml       # Main configuration file (packages & links)
-├── scripts
-│   └── uninstall.sh
+├── Brewfile                # Snapshot of all Homebrew packages
+├── gitconfig               # Git aliases, delta, and git-flow config
+├── install                 # Dotbot bootstrap script
+├── install.conf.yaml       # Main orchestrator (links, taps, brew, shell)
 ├── starship.toml           # Prompt configuration
 └── zshrc                   # ZSH configuration
 ```
 
 ## ⚙️ Setup
 
-Make sure your Operating System has the following packages installed.
+Ensure your system has **Homebrew** installed, then:
 
-1. git
-2. curl
+```bash
+# Verify requirements
+brew --version
+git --version
+curl --version
+```
 
-> **Note**: This setup relies on `system python` solely for bootstrapping the installer. All development versions of Python are managed by `mise` or `uv`.
+> [!NOTE]
+> This setup relies on `mise` to manage development runtimes. It automatically cleans up legacy Homebrew formulas to avoid `$PATH` conflicts.
 
 ## 🍴 Usage
 
-Clone the repository to your `$HOME` directory as `.dotfiles` and then run the installer.
+Clone the repository as `.dotfiles` in your `$HOME` and run the installer.
 
 ```bash
 # Clone
-cd ~
 git clone https://github.com/gagocaan/dotfiles.git ~/.dotfiles
 
-# Install
-~/.dotfiles/install
+# Install (Automated via Dotbot)
+cd ~/.dotfiles
+./install
 ```
 
 ### Post-Install
-After installation:
-1. Restart your terminal (or run `exec zsh`).
-2. **Install Languages**: Since we cleaned up Brew formulas, install your preferred versions globally via `mise`:
-   ```bash
-   mise use --global python@latest node@lts go@latest terraform@latest
-   ```
-3. Start **Neovim** (`nvim`) to let LazyVim install its plugins.
 
-## Uninstall and CleanUp
+1. **Restart your terminal** (Warp).
+2. **Install Runtimes**: Run `mise install -y` to deploy all languages defined in `install.conf.yaml`.
+3. **Set Global Versions**:
+
+   ```bash
+   mise use --global python@3.12 node@latest terraform@latest
+   ```
+
+4. **Open Neovim** (`nvim`) to trigger the LazyVim plugin installation.
+
+## 🚀 Cheat Sheet (Quick Start)
+
+### 📂 Navigation & Files
+
+| Command | Action |
+| :--- | :--- |
+| `z <path>` | Jump to directory (zoxide) |
+| `ls` / `ll` | List files with icons and git status (eza) |
+| `lt` | View directory tree (eza) |
+| `cat <file>` | Syntax-highlighted view (bat) |
+
+### ☸️ Kubernetes & Cloud
+
+| Command | Action |
+| :--- | :--- |
+| `k` | Alias for `kubectl` |
+| `k9s` | Launch K9s (Read-only by default for safety) |
+| `stern <pattern>` | Tail logs from multiple pods |
+| `starship explain` | See what each prompt symbol means |
+
+### 🐍 Python & Runtimes (mise/uv)
+
+| Command | Action |
+| :--- | :--- |
+| `uv sync` | Fast install of project dependencies |
+| `uv run <script>` | Run script in isolated environment |
+| `mise ls` | List all installed runtimes and versions |
+| `mise upgrade` | Upgrade managed languages (Node, Go, etc.) |
+
+### 󰊢 Git & Flow
+
+| Command | Action |
+| :--- | :--- |
+| `git ifi` | Initialize Git-Flow with standard prefixes |
+| `git gone` | Delete local branches already merged/deleted in remote |
+| `git undo` | Revert the last commit keeping changes |
+| `gclean` | Run `git gone` (custom alias) |
+
+### 🛠️ Maintenance
+
+| Command | Action |
+| :--- | :--- |
+| `./install` | Re-sync everything and clean up unused Brew formulas |
+| `check-stack` | Run health checks for Brew, Mise, and Starship |
+
+## 🧹 Uninstall and CleanUp
 
 ```bash
 ~/.dotfiles/scripts/uninstall.sh
 ```
 
-**Reboot your system for avoiding conflicts.**
+Reboot your system to ensure all session variables and path changes are cleared.
+
+---
+Maintained by **gagocaan** (2026)

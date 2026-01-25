@@ -1,9 +1,15 @@
+# ==============================================================================
+# DOTBOT CONFIGURATION 2026 - HIGH-PERFORMANCE DEV STACK
+# User: Carlos Andres Garzon Gonzalez
+# Role: Technical Software Leader / DevOps Engineer
+# ==============================================================================
+
 - defaults:
     link:
       relink: true
     brew:
-      - stderr: True,
-      - stdout: True,
+      stderr: true
+      stdout: true
 
 - clean: ["~"]
 
@@ -17,20 +23,16 @@
     ~/.zshrc: zshrc
 
 - shell:
-    - command: "brew bundle dump --force"
-      stderr: True,
-      stdout: True,
-      description: Backup current Brew
+    - command: "brew bundle dump --force --file=~/.dotfiles/Brewfile.bak"
+      description: "Backup preventivo de Homebrew"
 
 - tap:
     - fluxcd/tap
     - hashicorp/tap
-    - homebrew/services
     - infisical/get-cli
-    - weaveworks/tap
 
 - brew:
-    # Core Modern Tools (Rust-based)
+    # Modern CLI
     - mise
     - uv
     - zoxide
@@ -45,46 +47,47 @@
     - bottom
     - coreutils
     - htop
-    - tree
     - jq
+    - yq
     # Containers & Orchestration
-    - docker
-    - docker-buildx
-    - docker-compose
     - kubernetes-cli
     - kustomize
     - helm
     - fluxcd/tap/flux
     - k9s
     - stern
-    # Dev Tools
+    # Git & Dev Tools
     - gh
     - git-delta
-    - git-flow
     - lazygit
+    - git-flow-avh # Versión mantenida de git-flow
     - neovim
     - starship
 
 - cask:
-    - ghostty
-    - warp
+    - warp # Tu terminal de preferencia
     - rectangle
     - orbstack
     - dbeaver-community
     - appcleaner
 
 - shell:
-    - command: "brew search '/font-meslo-lg-nerd-font/' | awk '{ print $1 }' | xargs -I{} brew install --cask {} || true"
-      stderr: True,
-      stdout: True,
-      description: Nerd Fonts for your IDE
+    - command: "brew install --cask font-meslo-lg-nerd-font || true"
+      description: "Nerd Fonts para Warp y Neovim"
 
-    - command: "if [ ! -d \"$HOME/.config/nvim\" ]; then git clone https://github.com/LazyVim/starter \"$HOME/.config/nvim\"; else echo \"Neovim config already exists. Skipping LazyVim auto-install.\"; fi"
-      stderr: True,
-      stdout: True,
-      description: Installing LazyVim
+    - command: |
+        if [ ! -d "$HOME/.config/nvim" ]; then
+          git clone https://github.com/LazyVim/starter "$HOME/.config/nvim"
+        fi
+      description: "LazyVim setup"
 
-    - command: "mise install -y"
-      stderr: True,
-      stdout: True,
-      description: Install languages via mise
+    - command: "mise install -y && mise prune -y"
+      description: "Mantenimiento de Runtimes"
+
+    # Saneamiento de Home (Lo que eliminamos hoy)
+    - command: "rm -rf ~/.zsh_sessions ~/.zcompcache ~/.python_history ~/.lesshst"
+      description: "Limpieza de archivos temporales"
+
+    # Sincronización final: esto eliminará ghostty y otros sobrantes
+    - command: "if [ -f ~/.dotfiles/Brewfile ]; then brew bundle cleanup --file=~/.dotfiles/Brewfile --force; else echo 'Brewfile not found, skipping cleanup'; fi"
+      description: "Sincronización quirúrgica de Homebrew"

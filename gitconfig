@@ -1,10 +1,10 @@
 [user]
     name = gagocaan
     email = gagocaan@gmail.com
-    # signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5... (Poner tu llave publica aqui)
+    # signingkey = ~/.ssh/id_ed25519.pub # Ruta a tu llave para firmar
 
 [commit]
-    # gpgsign = true # Descomentar para firmar commits automaticamente
+    # gpgsign = true # Recomendado para equipos DevOps/Security
 
 [gpg]
     format = ssh
@@ -13,7 +13,7 @@
     editor = nvim
     pager = delta
     ignorecase = false
-    fsmonitor = true # Mejora performance en repos grandes
+    fsmonitor = true 
     untrackedCache = true
 
 [init]
@@ -42,7 +42,7 @@
     diffFilter = delta --color-only
 
 [delta]
-    navigate = true    # use n and N to move between diff sections
+    navigate = true    
     line-numbers = true
     side-by-side = false
     syntax-theme = Dracula
@@ -62,6 +62,7 @@
     autocorrect = 10
 
 [alias]
+    # --- Tus alias actuales ---
     st = status
     co = checkout
     br = branch
@@ -75,3 +76,22 @@
     last = log -1 HEAD
     undo = reset HEAD~1 --mixed
     amend = commit --amend
+
+    # --- Nuevos alias 2026 ---
+    # Inicialización rápida de git-flow (ifi = init flow immediately)
+    ifi = flow init -d
+    # Limpiar ramas locales que ya no existen en el servidor
+    gone = !git fetch -p && git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D
+    # Ver quién ha hecho qué de forma resumida
+    summary = shortlog -sn
+
+# --- Configuración de git-flow ---
+[gitflow "branch"]
+    master = main
+    develop = develop
+[gitflow "prefix"]
+    feature = feature/
+    release = release/
+    hotfix = hotfix/
+    support = support/
+    versiontag = v
