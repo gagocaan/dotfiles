@@ -63,6 +63,13 @@
     - git-flow-avh # Versión mantenida de git-flow
     - neovim
     - starship
+    - opencode
+    # AI & LLM
+    - ollama
+    # Infrastructure as Code
+    - terraform
+    - terraform-docs
+    - terraform-rover
 
 - cask:
     - warp # Tu terminal de preferencia
