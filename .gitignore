@@ -2,5 +2,7 @@
 .vscode
 ._*
 Brewfile
+Brewfile.bak
+Brewfile.pre_uninstall
 Brewtap
 requirements.txt

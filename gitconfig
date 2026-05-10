@@ -1,97 +1,227 @@
+# ==============================================================================
+# GIT CONFIGURATION 2026
+# User: Carlos Andres Garzon Gonzalez
+# ==============================================================================
+
+# ==============================================================================
+# USER IDENTITY
+# Identificación para commits - se usa en toda la repo
+# ==============================================================================
+
 [user]
     name = gagocaan
     email = gagocaan@gmail.com
-    # signingkey = ~/.ssh/id_ed25519.pub # Ruta a tu llave para firmar
+    # signingkey = ~/.ssh/id_ed25519.pub  # Descomenta para firmar commits con SSH
+
+# ==============================================================================
+# COMMIT SETTINGS
+# ==============================================================================
 
 [commit]
-    # gpgsign = true # Recomendado para equipos DevOps/Security
+    # gpgsign = true  # Descomenta para firmar commits con GPG (recomendado DevOps/Security)
+
+# ==============================================================================
+# GPG/SSH SETTINGS
+# ==============================================================================
 
 [gpg]
+    # Usar SSH keys para firmar en lugar de GPG
     format = ssh
 
+# ==============================================================================
+# CORE SETTINGS
+# ==============================================================================
+
 [core]
+    # Editor para commits, rebase, etc - usa Neovim
     editor = nvim
+
+    # Pager: usar delta para diffs con syntax highlighting
     pager = delta
+
+    # Búsqueda case-sensitive (no ignorar mayúsculas)
     ignorecase = false
-    fsmonitor = true 
+
+    # FileSystem Monitor: mejora performance en repos grandes
+    fsmonitor = true
+
+    # Cache de archivos no trackeados - acelera comandos
     untrackedCache = true
 
+# ==============================================================================
+# INITIALIZATION
+# ==============================================================================
+
 [init]
+    # Default branch para nuevos repos
     defaultBranch = main
 
+# ==============================================================================
+# FETCH SETTINGS
+# ==============================================================================
+
 [fetch]
+    # Limpiar branches remotos borrados (evita "stale branches")
     prune = true
+
+    # Limpiar tags borrados en remote
     pruneTags = true
 
+# ==============================================================================
+# PULL SETTINGS
+# ==============================================================================
+
 [pull]
+    # Usar rebase en lugar de merge para mantener historia lineal
     rebase = true
 
+# ==============================================================================
+# PUSH SETTINGS
+# ==============================================================================
+
 [push]
+    # Auto-crear remote al hacer push de branch nueva
     autoSetupRemote = true
+
+    # Push al branch actual por defecto (no usar "git push" solo)
     default = current
+
+    # Push tags automáticamente al hacer push
     followTags = true
 
+# ==============================================================================
+# MERGE SETTINGS
+# ==============================================================================
+
 [merge]
+    # Mostrar conflictos en formato "zdiff3" - más claro que diff3
     conflictstyle = zdiff3
 
+# ==============================================================================
+# DIFF SETTINGS
+# ==============================================================================
+
 [diff]
+    # Color para líneas movidas en diffs
     colorMoved = default
+
+    # Algoritmo de diff - histogram es más rápido y mejor para código
     algorithm = histogram
 
+# ==============================================================================
+# INTERACTIVE MODE
+# ==============================================================================
+
 [interactive]
+    # Usar delta para colorear diffs en "git add -p"
     diffFilter = delta --color-only
 
+# ==============================================================================
+# DELTA SETTINGS (Git Pager)
+# Delta = pager moderno con syntax highlighting
+# ==============================================================================
+
 [delta]
-    navigate = true    
+    # Habilitar navegación (j/k para mover entre hunks)
+    navigate = true
+
+    # Mostrar números de línea
     line-numbers = true
+
+    # Side-by-side: false = unified diff (recomendado)
     side-by-side = false
+
+    # Tema de colors - Dracula
     syntax-theme = Dracula
+
+    # Estilo de líneas añadidas (verde)
     plus-style = "syntax #012800"
+
+    # Estilo de líneas borradas (rojo)
     minus-style = "syntax #340001"
 
+# ==============================================================================
+# BRANCH SETTINGS
+# ==============================================================================
+
 [branch]
+    # Ordenar branches por fecha de commit más reciente
     sort = -committerdate
 
+# ==============================================================================
+# COLUMN LAYOUT
+# ==============================================================================
+
 [column]
+    # Auto-formatear output en columnas cuando sea apropiado
     ui = auto
 
+# ==============================================================================
+# RERERE (Reuse Recorded Resolution)
+#rememberear resolución de conflictos
+# ==============================================================================
+
 [rerere]
+    # Guardar cómo resoliste conflictos para reutilizar en el futuro
     enabled = true
 
+# ==============================================================================
+# HELP SETTINGS
+# ==============================================================================
+
 [help]
+    # Auto-ejecutar comando después de 1 segundo de tipeo (10 = 1 seg)
     autocorrect = 10
 
+# ==============================================================================
+# ALIASES
+# ==============================================================================
+
 [alias]
-    # --- Tus alias actuales ---
-    st = status
-    co = checkout
-    br = branch
-    ci = commit
-    aa = add --all
-    df = diff
-    dc = diff --cached
+    # === Shortcuts básicos ===
+    st = status           # git st
+    co = checkout         # git co
+    br = branch           # git br
+    ci = commit           # git ci
+    aa = add --all        # git aa
+
+    # === Diff ===
+    df = diff             # git df
+    dc = diff --cached    # git dc (staged changes)
+
+    # === Log ===
+    # Historial visual con colors
     lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+
+    # Log con todas las ramas
     lga = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all
-    unstage = reset HEAD --
-    last = log -1 HEAD
-    undo = reset HEAD~1 --mixed
-    amend = commit --amend
 
-    # --- Nuevos alias 2026 ---
-    # Inicialización rápida de git-flow (ifi = init flow immediately)
-    ifi = flow init -d
-    # Limpiar ramas locales que ya no existen en el servidor
-    gone = !git fetch -p && git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D
-    # Ver quién ha hecho qué de forma resumida
-    summary = shortlog -sn
+    # === Utilities ===
+    unstage = reset HEAD --     # git unstage (sacar del staging)
+    last = log -1 HEAD          # git last (último commit)
+    undo = reset HEAD~1 --mixed # git undo (deshacer commit sin perder cambios)
+    amend = commit --amend      # git amend (agregar al último commit)
 
-# --- Configuración de git-flow ---
+    # === 2026 Aliases ===
+    ifi = flow init -d          # git ifi - Inicializar git-flow rápidamente
+    gone = !git fetch -p && git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D  # git gone - Limpiar branches borradas en remote
+    summary = shortlog -sn      # git summary - Quién ha hecho cuántos commits
+
+# ==============================================================================
+# GIT-FLOW SETTINGS
+# ==============================================================================
+
 [gitflow "branch"]
+    # Branch principal
     master = main
+    # Branch de desarrollo
     develop = develop
+
 [gitflow "prefix"]
+    # Prefijos para branches
     feature = feature/
     release = release/
     hotfix = hotfix/
     support = support/
+    # Tags de versión
     versiontag = v

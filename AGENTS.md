@@ -1,6 +1,6 @@
 # AGENTS.md - Dotfiles Repository
 
-This is a **dotfiles** repository using [Dotbot](https://github.com/anishathalye/dotbot) to manage configuration on macOS.
+Dotfiles repository using [Dotbot](https://github.com/anishathalye/dotbot) to manage macOS configuration.
 
 ## Quick Commands
 
@@ -8,45 +8,52 @@ This is a **dotfiles** repository using [Dotbot](https://github.com/anishathalye
 # Install/reinstall all dotfiles
 cd ~/.dotfiles && ./install
 
-# Check health of dev stack
-check-stack
-
-# Sync Homebrew packages (updates Brewfile)
+# Update Brewfile from current system
 brew bundle dump --force --file=~/.dotfiles/Brewfile
+
+# Clean uninstall
+~/.dotfiles/scripts/uninstall.sh
 ```
 
 ## Key Files
 
 | File | Purpose |
 |------|---------|
-| `install.conf.yaml` | Main Dotbot config (links, taps, brew, shell commands) |
-| `zshrc` | ZSH configuration, aliases, lazy-loaded tool init |
+| `install.conf.yaml` | Main Dotbot config (links, taps, brew, casks, shell commands) |
+| `zshrc` | ZSH config, aliases, lazy-loaded tool init |
 | `gitconfig` | Git aliases, delta pager, git-flow config |
-| `starship.toml` | Prompt configuration |
-| `Brewfile` | Pinned Homebrew packages (generated) |
+| `starship.toml` | Prompt config (K8s, Terraform, Python, Node, Go, Rust) |
+| `settings.json` | IDE settings (fonts, terminal, theme) |
+| `Brewfile` | Pinned Homebrew packages |
 
-## Important Conventions
+## Conventions
 
-- **`./install` runs Dotbot**: It cleans home, creates symlinks, installs Homebrew packages, and runs post-install shell commands
+- **`./install` runs Dotbot**: Cleans symlinks → creates dirs → links files → installs brew/casks → runs post-install commands
 - **Symlinks created**: `~/.config/starship.toml`, `~/.gitconfig`, `~/.zshrc`
-- **mise for runtimes**: Languages (Node, Go, Python, Terraform) are managed by `mise`, not Homebrew
-- **k9s default**: `k9s` runs in read-only mode by default (`alias k9s="k9s --readonly"`)
-- **eza/bat over ls/cat**: Modern replacements configured in zshrc
+- **mise for runtimes**: Languages (Node, Go, Python, Terraform) managed by mise, not Homebrew
+- **k9s readonly**: `k9s` runs in read-only mode by default
+- **eza/bat > ls/cat**: Modern replacements in zshrc
+- **SSH keys**: Stored in `~/.ssh/`, copied from old Mac
 
-## Non-Obvious Git Aliases
+## Git Aliases
 
 ```bash
 git ifi    # Initialize git-flow with defaults
 git gone   # Delete local branches already merged on remote
 git undo   # Revert last commit, keep changes
+git lg     # Pretty log graph
+git summary # Show commit counts by author
+gclean     # Alias for git gone
 ```
 
 ## Common Tasks
 
-- Reinstall after system change: `./install`
-- Add new Homebrew package: Add to `install.conf.yaml` under `- brew:` or `- cask:`, then run `./install`
-- Update Brewfile: `brew bundle dump --force --file=~/.dotfiles/Brewfile`
-- Cleanup removed packages: `./install` runs cleanup automatically (last step)
+| Task | Command |
+|------|---------|
+| Add new package | Add to `install.conf.yaml` under `- brew:` or `- cask:`, then run `./install` |
+| Update Brewfile | `brew bundle dump --force --file=~/.dotfiles/Brewfile` |
+| Reinstall | `./install` |
+| Cleanup | Last step of `./install` runs `brew bundle cleanup` automatically |
 
 ## Submodules
 
@@ -55,4 +62,11 @@ This repo includes git submodules:
 - `dotbot-brew/` - Homebrew plugin for Dotbot
 - `dotbot/lib/pyyaml/` - YAML library
 
-Run `git submodule update --init --recursive` after cloning to get all submodules.
+The `./install` script auto-initializes submodules.
+
+## Notes for AI Agents
+
+- **Do not modify system files** outside of `~/.dotfiles/`
+- **Do not commit secrets** (SSH keys, credentials, tokens)
+- **Always backup** before running uninstall script
+- **Verify brew packages** match between `Brewfile` and `install.conf.yaml`

@@ -1,0 +1,25 @@
+{
+    "editor.fontFamily": "MesloLGS Nerd Font",
+    "editor.fontSize": 16,
+    "editor.inlineSuggest.enabled": true,
+    "editor.wordWrap": "on",
+    "editor.formatOnSave": false,
+    "editor.largeFileOptimizations": true,
+    "git.autofetch": true,
+    "git.openRepositoryInParentFolders": "never",
+    "git.confirmSync": false,
+    "explorer.confirmDelete": false,
+    "explorer.confirmPasteNative": false,
+    "terminal.explorerKind": "external",
+    "terminal.external.osxExec": "warp.app",
+    "terminal.integrated.fontFamily": "MesloLGS Nerd Font",
+    "terminal.integrated.fontSize": 16,
+    "terminal.integrated.defaultProfile.osx": "zsh",
+    "terminal.integrated.cursorStyle": "line",
+    "terminal.integrated.enableMultiLinePasteWarning": "never",
+    "workbench.colorTheme": "Dracula Theme",
+    "workbench.startupEditor": "none",
+    "[markdown]": {
+        "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
+    }
+}

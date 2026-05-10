@@ -108,12 +108,18 @@ format = 'via [$symbol$pyenv_prefix($version )(\($virtualenv\) )]($style)'
 
 [nodejs]
 symbol = " "
+format = 'via [$symbol$version]($style) '
+style = "green bold"
 
 [golang]
 symbol = " "
+format = 'via [$symbol$version]($style) '
+style = "cyan bold"
 
 [rust]
 symbol = " "
+format = 'via [$symbol$version]($style) '
+style = "red bold"
 
 [package]
 symbol = "󰏗 "
