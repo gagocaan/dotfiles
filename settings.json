@@ -21,5 +21,7 @@
     "workbench.startupEditor": "none",
     "[markdown]": {
         "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
-    }
+    },
+    "security.workspace.trust.untrustedFiles": "open",
+    "python.languageServer": "Default"
 }

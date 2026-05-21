@@ -111,6 +111,7 @@
     # -------------------------------------------------------------------
     - terraform          # IaC de HashiCorp
     - terraform-docs     # Genera docs de tf modules
+    - python@3.14        # Python 3.14
 
 # --- CASKS - Apps de GUI ---
 # Aplicaciones con interfaz gráfica instaladas via "brew install --cask".
@@ -124,8 +125,9 @@
     # Apps原有
     - obsidian          # Notes app
     - kiro              # Editor
-    - antigravity       # IDE (VSCode fork)
     - spotify           # Music
+    - folx              # Download manager/torrent
+    - lm-studio         # Run LLMs locally
 
 # --- POST-INSTALL COMMANDS ---
 # Comandos que se ejecutan DESPUÉS de instalar todo.

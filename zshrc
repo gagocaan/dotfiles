@@ -163,3 +163,7 @@ export HISTFILE=~/.zsh_history
 # Estos se activan automáticamente después de brew install
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/cagarzon/.lmstudio/bin"
+# End of LM Studio CLI section
+
