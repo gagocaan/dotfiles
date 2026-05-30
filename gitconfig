@@ -5,27 +5,27 @@
 
 # ==============================================================================
 # USER IDENTITY
-# Identificación para commits - se usa en toda la repo
+# Identification for commits - used throughout the repo
 # ==============================================================================
 
 [user]
     name = gagocaan
     email = gagocaan@gmail.com
-    # signingkey = ~/.ssh/id_ed25519.pub  # Descomenta para firmar commits con SSH
+    # signingkey = ~/.ssh/id_ed25519.pub  # Uncomment to sign commits with SSH
 
 # ==============================================================================
 # COMMIT SETTINGS
 # ==============================================================================
 
 [commit]
-    # gpgsign = true  # Descomenta para firmar commits con GPG (recomendado DevOps/Security)
+    # gpgsign = true  # Uncomment to sign commits with GPG (recommended for DevOps/Security)
 
 # ==============================================================================
 # GPG/SSH SETTINGS
 # ==============================================================================
 
 [gpg]
-    # Usar SSH keys para firmar en lugar de GPG
+    # Use SSH keys for signing instead of GPG
     format = ssh
 
 # ==============================================================================
@@ -33,19 +33,19 @@
 # ==============================================================================
 
 [core]
-    # Editor para commits, rebase, etc - usa Neovim
+    # Editor for commits, rebase, etc — uses Neovim
     editor = nvim
 
-    # Pager: usar delta para diffs con syntax highlighting
+    # Pager: use delta for diffs with syntax highlighting
     pager = delta
 
-    # Búsqueda case-sensitive (no ignorar mayúsculas)
+    # Case-sensitive search (do not ignore case)
     ignorecase = false
 
-    # FileSystem Monitor: mejora performance en repos grandes
+    # FileSystem Monitor: improves performance on large repos
     fsmonitor = true
 
-    # Cache de archivos no trackeados - acelera comandos
+    # Untracked file cache — speeds up commands
     untrackedCache = true
 
 # ==============================================================================
@@ -53,7 +53,7 @@
 # ==============================================================================
 
 [init]
-    # Default branch para nuevos repos
+    # Default branch for new repos
     defaultBranch = main
 
 # ==============================================================================
@@ -61,10 +61,10 @@
 # ==============================================================================
 
 [fetch]
-    # Limpiar branches remotos borrados (evita "stale branches")
+    # Remove deleted remote branches (prevents stale branches)
     prune = true
 
-    # Limpiar tags borrados en remote
+    # Remove deleted remote tags
     pruneTags = true
 
 # ==============================================================================
@@ -72,7 +72,7 @@
 # ==============================================================================
 
 [pull]
-    # Usar rebase en lugar de merge para mantener historia lineal
+    # Use rebase instead of merge to keep a linear history
     rebase = true
 
 # ==============================================================================
@@ -80,13 +80,13 @@
 # ==============================================================================
 
 [push]
-    # Auto-crear remote al hacer push de branch nueva
+    # Auto-create remote when pushing a new branch
     autoSetupRemote = true
 
-    # Push al branch actual por defecto (no usar "git push" solo)
+    # Push to current branch by default
     default = current
 
-    # Push tags automáticamente al hacer push
+    # Automatically push tags on push
     followTags = true
 
 # ==============================================================================
@@ -94,7 +94,7 @@
 # ==============================================================================
 
 [merge]
-    # Mostrar conflictos en formato "zdiff3" - más claro que diff3
+    # Show conflicts in "zdiff3" format — clearer than diff3
     conflictstyle = zdiff3
 
 # ==============================================================================
@@ -102,10 +102,10 @@
 # ==============================================================================
 
 [diff]
-    # Color para líneas movidas en diffs
+    # Color for moved lines in diffs
     colorMoved = default
 
-    # Algoritmo de diff - histogram es más rápido y mejor para código
+    # Diff algorithm — histogram is faster and better suited for code
     algorithm = histogram
 
 # ==============================================================================
@@ -113,31 +113,31 @@
 # ==============================================================================
 
 [interactive]
-    # Usar delta para colorear diffs en "git add -p"
+    # Use delta to colorize diffs in "git add -p"
     diffFilter = delta --color-only
 
 # ==============================================================================
 # DELTA SETTINGS (Git Pager)
-# Delta = pager moderno con syntax highlighting
+# Delta = modern pager with syntax highlighting
 # ==============================================================================
 
 [delta]
-    # Habilitar navegación (j/k para mover entre hunks)
+    # Enable navigation (j/k to move between hunks)
     navigate = true
 
-    # Mostrar números de línea
+    # Show line numbers
     line-numbers = true
 
-    # Side-by-side: false = unified diff (recomendado)
+    # Side-by-side: false = unified diff (recommended)
     side-by-side = false
 
-    # Tema de colors - Dracula
+    # Color theme — Dracula
     syntax-theme = Dracula
 
-    # Estilo de líneas añadidas (verde)
+    # Style for added lines (green)
     plus-style = "syntax #012800"
 
-    # Estilo de líneas borradas (rojo)
+    # Style for removed lines (red)
     minus-style = "syntax #340001"
 
 # ==============================================================================
@@ -145,7 +145,7 @@
 # ==============================================================================
 
 [branch]
-    # Ordenar branches por fecha de commit más reciente
+    # Sort branches by most recent commit date
     sort = -committerdate
 
 # ==============================================================================
@@ -153,16 +153,16 @@
 # ==============================================================================
 
 [column]
-    # Auto-formatear output en columnas cuando sea apropiado
+    # Auto-format output in columns when appropriate
     ui = auto
 
 # ==============================================================================
 # RERERE (Reuse Recorded Resolution)
-#rememberear resolución de conflictos
+# Remember conflict resolution for reuse
 # ==============================================================================
 
 [rerere]
-    # Guardar cómo resoliste conflictos para reutilizar en el futuro
+    # Save how you resolved conflicts to reuse in the future
     enabled = true
 
 # ==============================================================================
@@ -170,7 +170,7 @@
 # ==============================================================================
 
 [help]
-    # Auto-ejecutar comando después de 1 segundo de tipeo (10 = 1 seg)
+    # Auto-run corrected command after 1 second (10 = 1 sec)
     autocorrect = 10
 
 # ==============================================================================
@@ -178,7 +178,7 @@
 # ==============================================================================
 
 [alias]
-    # === Shortcuts básicos ===
+    # === Basic shortcuts ===
     st = status           # git st
     co = checkout         # git co
     br = branch           # git br
@@ -190,38 +190,38 @@
     dc = diff --cached    # git dc (staged changes)
 
     # === Log ===
-    # Historial visual con colors
+    # Visual history with colors
     lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 
-    # Log con todas las ramas
+    # Log across all branches
     lga = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all
 
     # === Utilities ===
-    unstage = reset HEAD --     # git unstage (sacar del staging)
-    last = log -1 HEAD          # git last (último commit)
-    undo = reset HEAD~1 --mixed # git undo (deshacer commit sin perder cambios)
-    amend = commit --amend      # git amend (agregar al último commit)
+    unstage = reset HEAD --     # git unstage (remove from staging)
+    last = log -1 HEAD          # git last (most recent commit)
+    undo = reset HEAD~1 --mixed # git undo (undo commit without losing changes)
+    amend = commit --amend      # git amend (add to last commit)
 
     # === 2026 Aliases ===
-    ifi = flow init -d          # git ifi - Inicializar git-flow rápidamente
-    gone = !git fetch -p && git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D  # git gone - Limpiar branches borradas en remote
-    summary = shortlog -sn      # git summary - Quién ha hecho cuántos commits
+    ifi = flow init -d          # git ifi - Initialize git-flow quickly
+    gone = !git fetch -p && git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D  # git gone - Remove branches deleted on remote
+    summary = shortlog -sn      # git summary - Who has made how many commits
 
 # ==============================================================================
 # GIT-FLOW SETTINGS
 # ==============================================================================
 
 [gitflow "branch"]
-    # Branch principal
+    # Main branch
     master = main
-    # Branch de desarrollo
+    # Development branch
     develop = develop
 
 [gitflow "prefix"]
-    # Prefijos para branches
+    # Branch prefixes
     feature = feature/
     release = release/
     hotfix = hotfix/
     support = support/
-    # Tags de versión
+    # Version tags
     versiontag = v

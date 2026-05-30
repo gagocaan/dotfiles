@@ -1,26 +1,26 @@
 #!/bin/zsh
 
 # ==============================================================================
-# Script de Desinstalación y Limpieza Profunda
-# Objetivo: Dejar el sistema limpio, removiendo solo lo instalado por dotfiles
+# Deep Uninstall & Cleanup Script
+# Goal: Leave the system clean, removing only what was installed by dotfiles
 # ==============================================================================
 
 set -e
 
-echo "⚠️ Iniciando desinstalación del stack de desarrollo..."
+echo "⚠️ Starting development stack uninstall..."
 
 # ------------------------------------------------------------------------------
-# 1. BACKUP DE SEGURIDAD
-# Guardamos estado actual de Homebrew por si necesitamos revertir
+# 1. SAFETY BACKUP
+# Save current Homebrew state in case we need to revert
 # ------------------------------------------------------------------------------
-echo "📦 Generando backup de seguridad..."
+echo "📦 Generating safety backup..."
 brew bundle dump --force --file="$HOME/.dotfiles/Brewfile.pre_uninstall"
 
 # ------------------------------------------------------------------------------
-# 2. DESINSTALAR CASKS (Aplicaciones GUI)
-# Solo las que estén en nuestro Brewfile actual
+# 2. UNINSTALL CASKS (GUI Applications)
+# Only those listed in our current Brewfile
 # ------------------------------------------------------------------------------
-echo "🖥️ Eliminando aplicaciones (Casks)..."
+echo "🖥️ Removing applications (Casks)..."
 for app in warp rectangle orbstack dbeaver-community appcleaner font-meslo-lg-nerd-font; do
     if brew list --cask "$app" &>/dev/null; then
         brew uninstall --cask --force "$app" 2>/dev/null || true
@@ -28,10 +28,10 @@ for app in warp rectangle orbstack dbeaver-community appcleaner font-meslo-lg-ne
 done
 
 # ------------------------------------------------------------------------------
-# 3. DESINSTALAR FÓRMULAS (CLI Tools)
-# Solo las que instalamos nosotros (del Brewfile), no dependencias del sistema
+# 3. UNINSTALL FORMULAE (CLI Tools)
+# Only those we installed (from Brewfile), not system dependencies
 # ------------------------------------------------------------------------------
-echo "⚙️ Eliminando fórmulas y binarios..."
+echo "⚙️ Removing formulae and binaries..."
 for pkg in mise uv zoxide eza bat fzf ripgrep fd atuin zellij coreutils htop jq yq \
            kubernetes-cli kustomize helm k9s stern gh git-delta lazygit neovim \
            starship opencode ollama terraform terraform-docs; do
@@ -41,37 +41,37 @@ for pkg in mise uv zoxide eza bat fzf ripgrep fd atuin zellij coreutils htop jq 
 done
 
 # ------------------------------------------------------------------------------
-# 4. LIMPIEZA DE CONFIGURACIONES DE USUARIO
-# Solo removemos configs que nosotros creamos, NO ~/.ssh, ~/.aws, etc
+# 4. USER CONFIGURATION CLEANUP
+# Only remove configs we created — NOT ~/.ssh, ~/.aws, etc.
 # ------------------------------------------------------------------------------
-echo "🧹 Limpiando configuraciones de dotfiles..."
+echo "🧹 Cleaning dotfile configurations..."
 
-# Configs de tools instaladas por nosotros
-rm -rf ~/.config/nvim         # LazyVim
+# Configs for tools installed by us
+rm -rf ~/.config/nvim          # LazyVim
 rm -rf ~/.config/starship.toml
-rm -rf ~/.config/fzf          # fzf config
+rm -rf ~/.config/fzf           # fzf config
 
-# NOTA: NO removemos ~/.config/mise porque contiene runtimes instalados
-#       (~/.local/share/mise/installs) - si lo necesitás, borralo manualmente
+# NOTE: We do NOT remove ~/.config/mise because it contains installed runtimes
+#       (~/.local/share/mise/installs) — if needed, delete it manually
 
-# Cachés y temporales de shell
+# Shell caches and temp files
 rm -rf ~/.zsh_sessions ~/.zcompcache ~/.lesshst ~/.python_history 2>/dev/null || true
 
 # ------------------------------------------------------------------------------
-# 5. LIMPIEZA FINAL DE HOMEBREW
-# Elimina symlinks rotos y cachés
+# 5. FINAL HOMEBREW CLEANUP
+# Remove broken symlinks and caches
 # ------------------------------------------------------------------------------
-echo "✨ Limpiando registros y archivos temporales..."
+echo "✨ Cleaning up records and temporary files..."
 brew cleanup --prune=all 2>/dev/null || true
 
 echo ""
-echo "✅ Desinstalación completada."
+echo "✅ Uninstall complete."
 echo ""
-echo "📋 Resumen:"
-echo "   - Backup guardado en: ~/.dotfiles/Brewfile.pre_uninstall"
-echo "   - Symlinks removidos: ~/.zshrc, ~/.gitconfig, ~/.config/starship.toml"
-echo "   - Aplicaciones GUI desinstaladas"
-echo "   - CLI tools desinstaladas"
+echo "📋 Summary:"
+echo "   - Backup saved to: ~/.dotfiles/Brewfile.pre_uninstall"
+echo "   - Symlinks removed: ~/.zshrc, ~/.gitconfig, ~/.config/starship.toml"
+echo "   - GUI applications uninstalled"
+echo "   - CLI tools uninstalled"
 echo ""
-echo "⚠️ NOTA: Tu ~/.ssh, ~/.aws, ~/.docker y otros directorios personales"
-echo "   fueron preservados (no los tocamos)."
+echo "⚠️ NOTE: Your ~/.ssh, ~/.aws, ~/.docker and other personal directories"
+echo "   were preserved (left untouched)."

@@ -4,161 +4,156 @@
 # Role: Technical Software Leader / DevOps Engineer
 # ==============================================================================
 
-# --- CONFIGURACIÓN DE DOTBOT ---
-# Cada sección se ejecuta en orden. Los symlinks tienen "relink: true" para
-# actualizar si ya existen. Brew muestra stdout/stderr para seguimiento.
+# --- DOTBOT CONFIGURATION ---
+# Each section is executed in order. Symlinks have "relink: true" to update if they exist. Brew shows stdout/stderr for tracking.
 
 - defaults:
-    link:
-      relink: true
-    brew:
-      stderr: true
-      stdout: true
+      link:
+          relink: true
+      brew:
+          stderr: true
+          stdout: true
 
-# --- LIMPIEZA PREVIA ---
-# Elimina symlinks rotos en home directory (~) antes de crear nuevos.
-# No borra archivos reales, solo limpia symlinks huérfanos.
+# --- PREVIOUS CLEANUP ---
+# Cleans up broken symlinks in the home directory (~) before creating new ones.
+# Does not delete real files, only orphaned symlinks.
 
 - clean: ["~"]
 
-# --- CREAR DIRECTORIOS ---
-# Crea directorios que no existen y que necesitamos para los symlinks.
+# --- CREATE DIRECTORIES ---
+# Creates directories that do not exist and which are needed for the symlinks.
 
 - create:
-    - ~/Workspace          # Directorio de trabajo personal
-    - ~/.config           # Configuración global (starship, nvim, etc)
+      - ~/Workspace # Personal workspace directory
+      - ~/.config # Global configuration (starship, nvim, etc)
 
 # --- SYMLINKS ---
-# Crea enlaces simbólicos desde ~ al repo de dotfiles.
-# Ej: ~/.zshrc -> ~/.dotfiles/zshrc
-# Si ya existen, se actualizan (relink: true).
+# Creates symbolic links from ~ to the dotfiles repo.
+# Example: ~/.zshrc -> ~/.dotfiles/zshrc
+# If they already exist, they will be updated (relink: true).
 
 - link:
-    ~/.config/starship.toml: starship.toml   # Prompt moderno
-    ~/.gitconfig: gitconfig                   # Config de Git
-    ~/.zshrc: zshrc                           # Shell interactivo
-    "$HOME/Library/Application Support/Antigravity/User/settings.json": settings.json  # IDE config (fonts, terminal, theme)
+      ~/.config/starship.toml: starship.toml # Modern prompt
+      ~/.gitconfig: gitconfig # Git configuration
+      ~/.zshrc: zshrc # Interactive shell
+      "$HOME/Library/Application Support/Code/User/settings.json": settings.json # IDE config (fonts, terminal, theme)
 
-# --- BACKUP DE HOMEbrew EXISTENTE ---
-# Por seguridad, hace backup del Brewfile actual del sistema
-# antes de instalar anything. Guarda en Brewfile.bak.
+# --- BACKUP EXISTING HOMEBREW ---
+# For safety, backup the current system Brewfile
+# before installing anything. Saves to Brewfile.bak.
 
 - shell:
-    - command: "brew bundle dump --force --file=~/.dotfiles/Brewfile.bak"
-      description: "Backup preventivo de Homebrew"
+      - command: "brew bundle dump --force --file=~/.dotfiles/Brewfile.bak"
+        description: "Preventive Homebrew backup"
 
-# --- TAP (Repositorios adicionales de Homebrew) ---
-# Tap = repositorio extra de fórmulas de Homebrew.
-# hashicorp/tap = terraform y herramientas de HashiCorp.
+# --- TAP (Additional Homebrew Repositories) ---
+# Tap = extra repository of Homebrew formulas.
+# hashicorp/tap = terraform and HashiCorp tools.
 
 - tap:
-    - hashicorp/tap
+      - hashicorp/tap
 
 # --- BREW (Formulae) - CLI Tools ---
-# Paquetes CLI instalados via "brew install".
-# Se ejecutan en orden, primero dependencies luego el resto.
+# CLI packages installed via "brew install".
+# Executed in order, first dependencies then the rest.
 
 - brew:
-    # === MODERN CLI TOOLS ===
-    # Reemplazos modernos de herramientas Unix classics
-    # -------------------------------------------------------------------
-    - mise        # Polyglot runtime manager (Node, Go, Python, etc)
-    - uv          # Python ultrarrápido (reemplaza pip/poetry)
-    - zoxide      # "cd" inteligente - aprende tus directorios frecuentes
-    - eza         # "ls" moderno con icons, git status, colors
-    - bat         # "cat" con syntax highlighting, line numbers
-    - fzf         # Fuzzy finder - búsqueda interactiva en CLI
-    - ripgrep     # "grep" ultrarrápido (rg)
-    - fd          # "find" moderno y más rápido (fd)
+      # === MODERN CLI TOOLS ===
+      # Modern replacements for Unix classic tools
+      # -------------------------------------------------------------------
+      - mise # Polyglot runtime manager (Node, Go, Python, etc)
+      - uv # Python ultrafast (replaces pip/poetry)
+      - zoxide # Intelligent "cd" - learns your frequent directories
+      - eza # "ls" modern with icons, git status, colors
+      - bat # "cat" with syntax highlighting, line numbers
+      - fzf # Fuzzy finder - interactive search in CLI
+      - ripgrep # "grep" ultrafast (rg)
+      - fd # "find" modern and faster (fd)
 
-    # === SHELL ENHANCEMENTS ===
-    # -------------------------------------------------------------------
-    - atuin       # Historial de shell con sync y búsqueda avanzada
-    - zellij      # Terminal multiplexer (como tmux, pero en Rust)
+      # === SHELL ENHANCEMENTS ===
+      # -------------------------------------------------------------------
+      - atuin # Shell history with sync and advanced search
+      - zellij # Terminal multiplexer (like tmux, but in Rust)
 
-    # === SYSTEM & MONITORING ===
-    # -------------------------------------------------------------------
-    - coreutils   # GNU coreutils (gls, greadlink, etc)
-    - htop        # Monitor de procesos interactivo (mejor que top)
-    - jq          # JSON processor - manipulate JSON en CLI
-    - yq          # YAML processor - igual que jq pero para YAML
+      # === SYSTEM & MONITORING ===
+      # -------------------------------------------------------------------
+      - coreutils # GNU coreutils (gls, greadlink, etc)
+      - htop # Interactive process monitor (better than top)
+      - jq # JSON processor - manipulate JSON in CLI
+      - yq # YAML processor - same as jq but for YAML
 
-    # === CONTAINERS & ORCHESTRATION ===
-    # -------------------------------------------------------------------
-    - kubernetes-cli    # kubectl - gestión de K8s
-    - kustomize         # K8s native config management
-    - helm              # Package manager para K8s
-    - k9s               # Terminal UI para K8s (alias: k9s --readonly)
-    - stern             # Tail múltiples pods de K8s en tiempo real
+      # === CONTAINERS & ORCHESTRATION ===
+      # -------------------------------------------------------------------
+      - kubernetes-cli # kubectl - K8s management
+      - kustomize # K8s native config management
+      - helm # Package manager for K8s
+      - k9s # Terminal UI for K8s (alias: k9s --readonly)
+      - stern # Tail multiple K8s pods in real time
 
-    # === GIT & DEV TOOLS ===
-    # -------------------------------------------------------------------
-    - gh           # GitHub CLI - issues, PRs, repos desde terminal
-    - git-delta    # Pager de git con syntax highlighting (bat para diffs)
-    - lazygit      # TUI para git -Stage, commit, push, branch, etc
-    - neovim       # Editor de texto moderno (fork de vim)
-    - starship     # Prompt cross-shell - muestra info de Git, K8s, etc
-    - opencode
-    # ZSH Plugins
-    - zsh-autosuggestions
-    - zsh-syntax-highlighting     # AI coding assistant (este!)
+      # === GIT & DEV TOOLS ===
+      # -------------------------------------------------------------------
+      - gh # GitHub CLI - issues, PRs, repos from terminal
+      - git-delta # Git pager with syntax highlighting (bat for diffs)
+      - lazygit # TUI for git -Stage, commit, push, branch, etc
+      - neovim # Modern text editor (fork of vim)
+      - starship # Prompt cross-shell - shows info of Git, K8s, etc
+      - opencode
+      # ZSH Plugins
+      - zsh-autosuggestions
+      - zsh-syntax-highlighting # AI coding assistant (this one!)
 
-    # === AI & LLM ===
-    # -------------------------------------------------------------------
-    - ollama       # Run LLMs localmente (Llama, Mistral, etc)
+      # === INFRASTRUCTURE AS CODE ===
+      # -------------------------------------------------------------------
+      - terraform # IaC from HashiCorp
+      - terraform-docs # Generates docs for tf modules
+      - python@3.14 # Python 3.14
 
-    # === INFRASTRUCTURE AS CODE ===
-    # -------------------------------------------------------------------
-    - terraform          # IaC de HashiCorp
-    - terraform-docs     # Genera docs de tf modules
-    - python@3.14        # Python 3.14
-
-# --- CASKS - Apps de GUI ---
-# Aplicaciones con interfaz gráfica instaladas via "brew install --cask".
+# --- CASKS - GUI Apps ---
+# GUI applications installed via "brew install --cask".
 
 - cask:
-    - warp              # Terminal de IA (tu preferido)
-    - rectangle         # Window manager - resize/snap windows
-    - orbstack          # Containers + VMs ligeras (reemplaza Docker Desktop)
-    - dbeaver-community # SQL client multi-database
-    - appcleaner        # Desinstalador limpio para Mac
-    # Apps原有
-    - obsidian          # Notes app
-    - kiro              # Editor
-    - spotify           # Music
-    - folx              # Download manager/torrent
-    - lm-studio         # Run LLMs locally
+      - warp # AI terminal (your preferred one)
+      - rectangle # Window manager - resize/snap windows
+      - orbstack # Containers + lightweight VMs (replaces Docker Desktop)
+      - dbeaver-community # SQL client multi-database
+      - appcleaner # Clean uninstaller for Mac
+      # Original apps
+      - obsidian # Notes app
+      - spotify # Music
+      - folx # Download manager/torrent
+      - lm-studio # Run LLMs locally
+      - visual-studio-code # Code editor
 
 # --- POST-INSTALL COMMANDS ---
-# Comandos que se ejecutan DESPUÉS de instalar todo.
+# Commands that run AFTER installing everything.
 
 - shell:
-    # Nerd Fonts - necesaria para icons en starship, neovim, eza, etc
-    # Si falla, no rompe la instalación (|| true)
-    - command: "brew install --cask font-meslo-lg-nerd-font || true"
-      description: "Nerd Fonts para icons en terminal"
+      # Nerd Fonts - needed for icons in starship, neovim, eza, etc
+      # If it fails, don't break installation (|| true)
+      - command: "brew install --cask font-meslo-lg-nerd-font || true"
+        description: "Nerd Fonts for terminal icons"
 
-    # LazyVim - Starter config para Neovim
-    # Solo clona si ~/.config/nvim NO existe
-    - command: |
-        if [ ! -d "$HOME/.config/nvim" ]; then
-          git clone https://github.com/LazyVim/starter "$HOME/.config/nvim"
-        fi
-      description: "LazyVim setup (starter config)"
+      # LazyVim - Starter config for Neovim
+      # Only clone if ~/.config/nvim does NOT exist
+      - command: |
+            if [ ! -d "$HOME/.config/nvim" ]; then
+              git clone https://github.com/LazyVim/starter "$HOME/.config/nvim"
+            fi
+        description: "LazyVim setup (starter config)"
 
-    # Mise - Instala runtimes que estén en ~/.config/mise.toml
-    # "mise install" instala lo que esté configurado
-    # "mise prune" limpia versiones antigas
-    # Solo corre si mise ya está instalado (después del brew install)
-    - command: "if command -v mise &> /dev/null; then mise install -y && mise prune -y; fi"
-      description: "Mantenimiento de Runtimes (Node, Go, Python, etc)"
+      # Mise - Installs runtimes that are in ~/.config/mise.toml
+      # "mise install" installs what is configured
+      # "mise prune" cleans old versions
+      # Only runs if mise is already installed (after brew install)
+      - command: "if command -v mise &> /dev/null; then mise install -y && mise prune -y; fi"
+        description: "Runtime maintenance (Node, Go, Python, etc)"
 
-    # Limpieza de archivos temporales del home
-    - command: "rm -rf ~/.zsh_sessions ~/.zcompcache ~/.python_history ~/.lesshst"
-      description: "Limpieza de archivos temporales de shell"
+      # Cleanup of temporary files in home
+      - command: "rm -rf ~/.zsh_sessions ~/.zcompcache ~/.python_history ~/.lesshst"
+        description: "Cleanup of temporary shell files"
 
-    # Sincronización de Homebrew - cleanup de packages huérfanos
-    # Compara Brewfile vs packages instalados y desinstala lo que no esté
-    # en Brewfile (ej: si tenías ghostty instalado, lo quita)
-    - command: "if [ -f ~/.dotfiles/Brewfile ]; then brew bundle cleanup --file=~/.dotfiles/Brewfile --force; else echo 'Brewfile not found, skipping cleanup'; fi"
-      description: "Sincronización de Homebrew - elimina packages no listados"
+      # Homebrew synchronization - cleanup of orphaned packages
+      # Compares Brewfile vs installed packages and removes anything not listed
+      # (e.g.: if you had ghostty installed, it removes it)
+      - command: "if [ -f ~/.dotfiles/Brewfile ]; then brew bundle cleanup --file=~/.dotfiles/Brewfile --force; else echo 'Brewfile not found, skipping cleanup'; fi"
+        description: "Homebrew sync — removes unlisted packages"

@@ -1,11 +1,10 @@
 # Dotfiles
-
 Personal development environment for macOS (Mac mini M4). Automated with [Dotbot](https://github.com/anishathalye/dotbot).
 
 ## What's Installed
 
 | Category | Tools |
-|----------|-------|
+| :--- | :--- |
 | **Shell** | ZSH + zsh-autosuggestions + zsh-syntax-highlighting |
 | **Prompt** | Starship (Git, K8s, Terraform, Python, Node, Go, Rust) |
 | **Navigation** | zoxide (`z`), fzf |
@@ -28,38 +27,38 @@ Personal development environment for macOS (Mac mini M4). Automated with [Dotbot
 ├── zshrc
 ├── gitconfig
 ├── starship.toml
-├── settings.json        # Antigravity/VSCode settings
+├── settings.json        # VSCode settings
 └── scripts/uninstall.sh
 ```
 
-## Install
+## Installation
+Follow these steps to set up your environment:
 
 ```bash
 git clone https://github.com/gagocaan/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles && ./install
 ```
 
-## Post-Install
-
+## Post-Installation
 1. Restart terminal (Warp)
 2. Run `nvim` → LazyVim installs plugins
 
 ## Common Commands
 
 | Command | Description |
-|---------|-------------|
+| :--- | :--- |
 | `z <dir>` | Jump to directory (zoxide) |
 | `ll` | List files with git status (eza) |
 | `cat <file>` | Syntax-highlighted view (bat) |
 | `k` | kubectl |
-| `k9s` | K8s UI (readonly) |
+| `k9s` | K8s UI (read-only mode) |
 | `git ifi` | Init git-flow |
 | `git gone` | Delete merged branches |
 
 ## Maintenance
 
 ```bash
-cd ~/.dotfiles && ./install    # Reinstall
+cd ~/.dotfiles && ./install    # Reinstall/Update
 ~/.dotfiles/scripts/uninstall.sh  # Clean uninstall
 ```
 

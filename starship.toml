@@ -1,11 +1,11 @@
 # ==============================================================================
-# STARSHIP CONFIGURATION 2026 - DEVOPS & CLOUD COST OPTIMIZED
+# STARSHIP CONFIGURATION 2026 - DEVOPS & CLOUD — COST OPTIMIZED
 # ==============================================================================
 
-# Timeout para comandos (evita lag en repositorios Git masivos)
+# Command timeout (prevents lag in large Git repositories)
 command_timeout = 5000
 
-# Formato del prompt: Organizado por capas (OS -> Directorio -> Git -> K8s/Cloud -> Lenguajes)
+# Prompt format: Layered order (OS -> Directory -> Git -> K8s/Cloud -> Languages)
 format = """
 $os$username$hostname$directory$git_branch$git_status$kubernetes$terraform$docker_context$package$python$nodejs$golang$rust$fill$cmd_duration$line_break$character"""
 
@@ -16,7 +16,7 @@ symbol = " "
 success_symbol = "[➜](bold green)"
 error_symbol = "[➜](bold red)"
 
-# --- DIRECTORIO & SISTEMA ---
+# --- DIRECTORY & SYSTEM ---
 [directory]
 read_only = " 󰌾"
 truncation_length = 3
@@ -71,7 +71,7 @@ Unknown = " "
 Void = " "
 Windows = "󰍲 "
 
-# --- NUBE & ORQUESTACIÓN (Crítico para DevOps) ---
+# --- CLOUD & ORCHESTRATION (Critical for DevOps) ---
 [kubernetes]
 symbol = "󱃾 "
 disabled = false
@@ -89,7 +89,7 @@ symbol = "  "
 [docker_context]
 symbol = " "
 
-# --- CONTROL DE VERSIONES ---
+# --- VERSION CONTROL ---
 [git_branch]
 symbol = " "
 style = "bold yellow"
@@ -98,10 +98,10 @@ style = "bold yellow"
 style = "bold red"
 format = '([\[$all_status$ahead_behind\]]($style) )'
 
-# --- LENGUAJES & RUNTIMES ---
+# --- LANGUAGES & RUNTIMES ---
 [python]
 symbol = " "
-# Optimizado para detectar entornos de 'uv'
+# Optimized to detect 'uv' virtual environments
 pyenv_prefix = "venv "
 python_binary = ["./venv/bin/python", "python", "python3"]
 format = 'via [$symbol$pyenv_prefix($version )(\($virtualenv\) )]($style)'
@@ -124,7 +124,7 @@ style = "red bold"
 [package]
 symbol = "󰏗 "
 
-# --- UTILIDADES ---
+# --- UTILITIES ---
 [cmd_duration]
 min_time = 2000
 format = 'took [$duration]($style) '
@@ -133,7 +133,7 @@ style = "yellow bold"
 [hostname]
 ssh_symbol = " "
 
-# --- ICONOS DE LENGUAJES (Mantenidos de tu config original) ---
+# --- LANGUAGE ICONS (Kept from your original config) ---
 [buf]
 symbol = " "
 [c]
