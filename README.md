@@ -27,6 +27,7 @@ Personal development environment for macOS (Mac mini M4). Automated with [Dotbot
 ├── zshrc
 ├── gitconfig
 ├── starship.toml
+├── mise/config.toml     # Runtime versions (Go, Python, Node)
 ├── settings.json        # VSCode settings
 └── scripts/uninstall.sh
 ```

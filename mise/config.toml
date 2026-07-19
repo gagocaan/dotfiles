@@ -1,0 +1,10 @@
+[tools]
+go = "latest"
+python = "latest"
+node = "latest"
+
+[settings]
+# Automatically install missing tools on mise install
+auto_install = true
+# Keep downloaded archives to avoid re-downloading
+always_keep_download = true

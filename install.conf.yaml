@@ -37,6 +37,7 @@
       ~/.gitconfig: gitconfig # Git configuration
       ~/.zshrc: zshrc # Interactive shell
       "$HOME/Library/Application Support/Code/User/settings.json": settings.json # IDE config (fonts, terminal, theme)
+      ~/.config/mise/config.toml: mise/config.toml # Runtime versions (Go, Python, Node)
 
 # --- BACKUP EXISTING HOMEBREW ---
 # For safety, backup the current system Brewfile
