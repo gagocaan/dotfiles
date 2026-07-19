@@ -20,8 +20,9 @@
     "workbench.colorTheme": "Dracula Theme",
     "workbench.startupEditor": "none",
     "[markdown]": {
-        "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
+        "editor.defaultFormatter": "yzhang.markdown-all-in-one"
     },
     "security.workspace.trust.untrustedFiles": "open",
-    "python.languageServer": "Default"
+    "python.languageServer": "Default",
+    "python.analysis.typeCheckingMode": "basic"
 }
