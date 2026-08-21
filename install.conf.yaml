@@ -71,6 +71,10 @@
       - fzf # Fuzzy finder - interactive search in CLI
       - ripgrep # "grep" ultrafast (rg)
       - fd # "find" modern and faster (fd)
+      - direnv # Auto-load env per project (.envrc)
+      - tree # Directory tree view
+      - lftp # Advanced file transfer
+      - ffmpeg # Media processing (needed by many tools)
 
       # === SHELL ENHANCEMENTS ===
       # -------------------------------------------------------------------

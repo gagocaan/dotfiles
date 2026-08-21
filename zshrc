@@ -42,14 +42,19 @@ fi
 
 # --- atuin: Magical Shell History ---
 # History with sync, advanced search, and cross-machine sharing.
-# --disable-up-arrow: Warp handles arrow keys natively, avoids conflict
 if command -v atuin &> /dev/null; then
-  eval "$(atuin init zsh --disable-up-arrow)"
+  eval "$(atuin init zsh)"
+fi
+
+# --- direnv: Auto-load env per project ---
+# Loads .envrc automatically on cd
+if command -v direnv &> /dev/null; then
+  eval "$(direnv hook zsh)"
 fi
 
 # --- starship: Cross-shell Prompt ---
 # Shows Git status, K8s context, runtime versions, etc.
-# Disabled in Warp (uses its native prompt) but enabled in Zellij/SSH
+# Disabled in Warp (uses its native prompt) but enabled in Ghostty/Zellij/SSH
 if [[ $TERM_PROGRAM != "WarpTerminal" ]] && command -v starship &> /dev/null; then
   eval "$(starship init zsh)"
 fi

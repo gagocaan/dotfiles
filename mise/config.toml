@@ -1,7 +1,7 @@
 [tools]
-go = "latest"
-python = "latest"
-node = "latest"
+go = "1.22"
+python = "3.12"
+node = "20"
 
 [settings]
 # Automatically install missing tools on mise install
