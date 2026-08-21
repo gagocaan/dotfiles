@@ -21,7 +21,7 @@ brew bundle dump --force --file="$HOME/.dotfiles/Brewfile.pre_uninstall"
 # Only those listed in our current Brewfile
 # ------------------------------------------------------------------------------
 echo "🖥️ Removing applications (Casks)..."
-for app in warp rectangle orbstack dbeaver-community appcleaner font-meslo-lg-nerd-font; do
+for app in ghostty rectangle orbstack dbeaver-community appcleaner font-meslo-lg-nerd-font; do
     if brew list --cask "$app" &>/dev/null; then
         brew uninstall --cask --force "$app" 2>/dev/null || true
     fi

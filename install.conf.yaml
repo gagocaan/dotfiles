@@ -38,6 +38,7 @@
       ~/.zshrc: zshrc # Interactive shell
       "$HOME/Library/Application Support/Code/User/settings.json": settings.json # IDE config (fonts, terminal, theme)
       ~/.config/mise/config.toml: mise/config.toml # Runtime versions (Go, Python, Node)
+      ~/.config/ghostty/config: ghostty/config # Ghostty terminal config
 
 # --- BACKUP EXISTING HOMEBREW ---
 # For safety, backup the current system Brewfile
@@ -99,6 +100,7 @@
       - neovim # Modern text editor (fork of vim)
       - starship # Prompt cross-shell - shows info of Git, K8s, etc
       - opencode
+      - infisical # Secrets manager CLI
       # ZSH Plugins
       - zsh-autosuggestions
       - zsh-syntax-highlighting # AI coding assistant (this one!)
@@ -113,7 +115,7 @@
 # GUI applications installed via "brew install --cask".
 
 - cask:
-      - warp # AI terminal (your preferred one)
+      - ghostty # Fast, feature-rich terminal
       - rectangle # Window manager - resize/snap windows
       - orbstack # Containers + lightweight VMs (replaces Docker Desktop)
       - dbeaver-community # SQL client multi-database
