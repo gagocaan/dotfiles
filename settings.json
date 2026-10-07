@@ -29,11 +29,12 @@
         "https://developer.microsoft.com/json-schemas/": true,
         "https://json-schema.org/": true,
         "https://json.schemastore.org/": true,
+        "https://models.dev": true,
+        "https://opencode.ai/": true,
         "https://raw.githubusercontent.com/devcontainers/spec/": true,
         "https://raw.githubusercontent.com/microsoft/vscode/": true,
         "https://schemastore.azurewebsites.net/": true,
-        "https://www.schemastore.org/": true,
-        "https://opencode.ai/": true
+        "https://www.schemastore.org/": true
     },
     "terminal.integrated.initialHint": false,
     "terminal.integrated.mouseWheelScrollSensitivity": 3,
