@@ -203,25 +203,5 @@
     amend = commit --amend      # git amend (add to last commit)
 
     # === 2026 Aliases ===
-    ifi = flow init -d          # git ifi - Initialize git-flow quickly
     gone = !git fetch -p && git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D  # git gone - Remove branches deleted on remote
     summary = shortlog -sn      # git summary - Who has made how many commits
-
-# ==============================================================================
-# GIT-FLOW SETTINGS
-# ==============================================================================
-
-[gitflow "branch"]
-    # Main branch
-    master = main
-    # Development branch
-    develop = develop
-
-[gitflow "prefix"]
-    # Branch prefixes
-    feature = feature/
-    release = release/
-    hotfix = hotfix/
-    support = support/
-    # Version tags
-    versiontag = v

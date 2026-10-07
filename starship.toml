@@ -1,11 +1,14 @@
 # ==============================================================================
-# STARSHIP CONFIGURATION 2026 - DEVOPS & CLOUD — COST OPTIMIZED
+# STARSHIP CONFIGURATION 2026 - DEVOPS & CLOUD COST OPTIMIZED
 # ==============================================================================
 
-# Command timeout (prevents lag in large Git repositories)
+# Timeout para comandos (evita lag en repositorios Git masivos)
 command_timeout = 5000
 
-# Prompt format: Layered order (OS -> Directory -> Git -> K8s/Cloud -> Languages)
+# Límite para el escaneo de archivos al detectar módulos del prompt.
+scan_timeout = 100
+
+# Formato del prompt: Organizado por capas (OS -> Directorio -> Git -> K8s/Cloud -> Lenguajes)
 format = """
 $os$username$hostname$directory$git_branch$git_status$kubernetes$terraform$docker_context$package$python$nodejs$golang$rust$fill$cmd_duration$line_break$character"""
 
@@ -16,7 +19,7 @@ symbol = " "
 success_symbol = "[➜](bold green)"
 error_symbol = "[➜](bold red)"
 
-# --- DIRECTORY & SYSTEM ---
+# --- DIRECTORIO & SISTEMA ---
 [directory]
 read_only = " 󰌾"
 truncation_length = 3
@@ -71,7 +74,7 @@ Unknown = " "
 Void = " "
 Windows = "󰍲 "
 
-# --- CLOUD & ORCHESTRATION (Critical for DevOps) ---
+# --- NUBE & ORQUESTACIÓN (Crítico para DevOps) ---
 [kubernetes]
 symbol = "󱃾 "
 disabled = false
@@ -89,7 +92,7 @@ symbol = "  "
 [docker_context]
 symbol = " "
 
-# --- VERSION CONTROL ---
+# --- CONTROL DE VERSIONES ---
 [git_branch]
 symbol = " "
 style = "bold yellow"
@@ -98,13 +101,13 @@ style = "bold yellow"
 style = "bold red"
 format = '([\[$all_status$ahead_behind\]]($style) )'
 
-# --- LANGUAGES & RUNTIMES ---
+# --- LENGUAJES & RUNTIMES ---
 [python]
 symbol = " "
-# Optimized to detect 'uv' virtual environments
-pyenv_prefix = "venv "
-python_binary = ["./venv/bin/python", "python", "python3"]
-format = 'via [$symbol$pyenv_prefix($version )(\($virtualenv\) )]($style)'
+style = "yellow bold"
+# Detecta venvs de uv (.venv) y venvs clásicos (venv) antes de caer al python de mise
+python_binary = [".venv/bin/python", "venv/bin/python", "python3", "python"]
+format = 'via [$symbol$version( \($virtualenv\))]($style) '
 
 [nodejs]
 symbol = " "
@@ -124,7 +127,7 @@ style = "red bold"
 [package]
 symbol = "󰏗 "
 
-# --- UTILITIES ---
+# --- UTILIDADES ---
 [cmd_duration]
 min_time = 2000
 format = 'took [$duration]($style) '
@@ -133,7 +136,7 @@ style = "yellow bold"
 [hostname]
 ssh_symbol = " "
 
-# --- LANGUAGE ICONS (Kept from your original config) ---
+# --- ICONOS DE LENGUAJES (Mantenidos de tu config original) ---
 [buf]
 symbol = " "
 [c]

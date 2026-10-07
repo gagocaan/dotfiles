@@ -43,7 +43,7 @@ fi
 # --- atuin: Magical Shell History ---
 # History with sync, advanced search, and cross-machine sharing.
 if command -v atuin &> /dev/null; then
-  eval "$(atuin init zsh)"
+  eval "$(atuin init zsh --disable-up-arrow)"
 fi
 
 # --- direnv: Auto-load env per project ---
@@ -54,8 +54,7 @@ fi
 
 # --- starship: Cross-shell Prompt ---
 # Shows Git status, K8s context, runtime versions, etc.
-# Disabled in Warp (uses its native prompt) but enabled in Ghostty/Zellij/SSH
-if [[ $TERM_PROGRAM != "WarpTerminal" ]] && command -v starship &> /dev/null; then
+if command -v starship &> /dev/null; then
   eval "$(starship init zsh)"
 fi
 
@@ -105,7 +104,7 @@ alias k="kubectl"
 # k9s in readonly mode for safety (prevents accidents in production)
 alias k9s="k9s --readonly"
 
-# Remove already-merged git branches from remote
+# Force-delete local git branches whose remote branch was deleted
 alias gclean="git gone"
 
 # ==============================================================================
@@ -120,14 +119,14 @@ extract() {
       *.tar.bz2) tar xf $1 ;;
       *.tar.gz)  tar xf $1 ;;
       *.bz2)     bunzip2 $1 ;;
-      *.rar)     unrar x $1 ;;
+      *.rar)     tar xf $1 ;;   # bsdtar (macOS) reads rar via libarchive
       *.gz)      gunzip $1 ;;
       *.tar)     tar xf $1 ;;
       *.tbz2)    tar xf $1 ;;
       *.tgz)     tar xf $1 ;;
       *.zip)     unzip $1 ;;
       *.Z)       uncompress $1 ;;
-      *.7z)      7z x $1 ;;
+      *.7z)      tar xf $1 ;;   # bsdtar (macOS) reads 7z via libarchive
       *)         echo "'$1' cannot be extracted via extract()" ;;
     esac
   else
@@ -160,11 +159,24 @@ export HISTFILE=~/.zsh_history
 # 6. ZSH PLUGINS (Require additional installation)
 # ==============================================================================
 
-# Uncomment if installed via brew:
-# ZSH Plugins — Syntax highlighting and autosuggestions
-# These activate automatically after brew install
-source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# ZSH Plugins — Autosuggestions and syntax highlighting
+# Installed via brew (declared in install.conf.yaml). Each one is only sourced
+# if present, so a clean system without them doesn't throw errors.
+# NOTE: zsh-syntax-highlighting must be sourced last, after other plugins/widgets.
+if command -v brew &> /dev/null; then
+  _brew_prefix="$(brew --prefix)"
+  [ -f "$_brew_prefix/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ] \
+    && source "$_brew_prefix/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+  [ -f "$_brew_prefix/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] \
+    && source "$_brew_prefix/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+  unset _brew_prefix
+fi
+
+# ==============================================================================
+# 7. FORCE EMACS MODE (Override vi mode from plugins or other sources)
+# ==============================================================================
+bindkey -e
+
 # Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/cagarzon/.lmstudio/bin"
+export PATH="$PATH:$HOME/.lmstudio/bin"
 # End of LM Studio CLI section
