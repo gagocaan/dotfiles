@@ -5,14 +5,19 @@
 # ==============================================================================
 
 # --- DOTBOT CONFIGURATION ---
-# Each section is executed in order. Symlinks have "relink: true" to update if they exist. Brew shows stdout/stderr for tracking.
+# Each section is executed in order. Symlinks have "relink: true" to update if they exist
+# and "create: true" to create missing parent directories (e.g. ~/.config/ghostty).
+# Shell steps show stdout/stderr so you can see what the Homebrew sync removes.
+# THIS FILE IS THE SINGLE SOURCE OF TRUTH for packages: anything installed but not
+# listed under "brew"/"cask" is removed by the Homebrew sync at the end.
 
 - defaults:
       link:
           relink: true
-      brew:
-          stderr: true
+          create: true
+      shell:
           stdout: true
+          stderr: true
 
 # --- PREVIOUS CLEANUP ---
 # Cleans up broken symlinks in the home directory (~) before creating new ones.
@@ -38,7 +43,7 @@
       ~/.zshrc: zshrc # Interactive shell
       "$HOME/Library/Application Support/Code/User/settings.json": settings.json # IDE config (fonts, terminal, theme)
       ~/.config/mise/config.toml: mise/config.toml # Runtime versions (Go, Python, Node)
-      ~/.config/ghostty/config: ghostty/config # Ghostty terminal config
+      ~/.config/ghostty/config.ghostty: ghostty/config # Ghostty terminal config
 
 # --- BACKUP EXISTING HOMEBREW ---
 # For safety, backup the current system Brewfile
@@ -51,9 +56,26 @@
 # --- TAP (Additional Homebrew Repositories) ---
 # Tap = extra repository of Homebrew formulas.
 # hashicorp/tap = terraform and HashiCorp tools.
+# anomalyco/tap = opencode-v2 (OpenCode CLI).
+# frankea/whisky = whisky (Wine wrapper).
 
 - tap:
       - hashicorp/tap
+      - anomalyco/tap # opencode-v2
+      - frankea/whisky # whisky (Wine wrapper)
+
+# --- TRUST TAPS ---
+# Recent Homebrew refuses to load formulae/casks from non-official taps
+# until they are trusted. Must run after "tap" and before "brew"/"cask".
+# Keep this list in sync with the "tap" section above. It can't be derived
+# with yq because yq itself is installed later, in the "brew" section.
+# "|| true" keeps older Homebrew versions without `brew trust` from breaking the install.
+# The Homebrew sync at the end rewrites the trust store from its temporary Brewfile,
+# so it also declares these taps with "trusted: true" — keep all three places in sync.
+
+- shell:
+      - command: "brew trust --tap hashicorp/tap anomalyco/tap frankea/whisky || true"
+        description: "Trust declared Homebrew taps"
 
 # --- BREW (Formulae) - CLI Tools ---
 # CLI packages installed via "brew install".
@@ -75,6 +97,8 @@
       - tree # Directory tree view
       - lftp # Advanced file transfer
       - ffmpeg # Media processing (needed by many tools)
+      - speedtest-go # Internet speed test (speedtest.net)
+      - mole # Deep clean and optimize your Mac
 
       # === SHELL ENHANCEMENTS ===
       # -------------------------------------------------------------------
@@ -103,17 +127,19 @@
       - lazygit # TUI for git -Stage, commit, push, branch, etc
       - neovim # Modern text editor (fork of vim)
       - starship # Prompt cross-shell - shows info of Git, K8s, etc
-      - opencode
+      - anomalyco/tap/opencode-v2 # AI coding agent (installs the `opencode` binary)
       - infisical # Secrets manager CLI
       # ZSH Plugins
       - zsh-autosuggestions
-      - zsh-syntax-highlighting # AI coding assistant (this one!)
+      - zsh-syntax-highlighting # Fish-like syntax highlighting for zsh
 
       # === INFRASTRUCTURE AS CODE ===
       # -------------------------------------------------------------------
-      - terraform # IaC from HashiCorp
+      - hashicorp/tap/terraform # IaC from HashiCorp
       - terraform-docs # Generates docs for tf modules
-      - python@3.14 # Python 3.14
+
+      # NOTE: Python/Go/Node runtimes come from mise (see mise/config.toml), not brew.
+      # python@3.14 is not declared: brew installs it as a dependency of gcloud-cli.
 
 # --- CASKS - GUI Apps ---
 # GUI applications installed via "brew install --cask".
@@ -124,12 +150,21 @@
       - orbstack # Containers + lightweight VMs (replaces Docker Desktop)
       - dbeaver-community # SQL client multi-database
       - appcleaner # Clean uninstaller for Mac
-      # Original apps
+      # Productivity & media
       - obsidian # Notes app
       - spotify # Music
       - folx # Download manager/torrent
-      - lm-studio # Run LLMs locally
+      - vorssaint # Menu bar toolkit (keep-awake, monitor, volume mixer)
+      - frankea/whisky/whisky # Wine wrapper built with SwiftUI
+      # Development
       - visual-studio-code # Code editor
+      - gcloud-cli # Google Cloud CLI
+      # AI
+      - lm-studio # Run LLMs locally
+      - lm-studio-bionic # LM Studio agent for open models
+      - opencode-desktop # OpenCode desktop client
+      # Utilities
+      - balenaetcher # Flash OS images to SD cards & USB drives
 
 # --- POST-INSTALL COMMANDS ---
 # Commands that run AFTER installing everything.
@@ -148,7 +183,7 @@
             fi
         description: "LazyVim setup (starter config)"
 
-      # Mise - Installs runtimes that are in ~/.config/mise.toml
+      # Mise - Installs runtimes that are in ~/.config/mise/config.toml
       # "mise install" installs what is configured
       # "mise prune" cleans old versions
       # Only runs if mise is already installed (after brew install)
@@ -160,7 +195,24 @@
         description: "Cleanup of temporary shell files"
 
       # Homebrew synchronization - cleanup of orphaned packages
-      # Compares Brewfile vs installed packages and removes anything not listed
-      # (e.g.: if you had ghostty installed, it removes it)
-      - command: "if [ -f ~/.dotfiles/Brewfile ]; then brew bundle cleanup --file=~/.dotfiles/Brewfile --force; else echo 'Brewfile not found, skipping cleanup'; fi"
+      # Builds a temporary Brewfile FROM this file (single source of truth),
+      # then removes anything installed that is not listed here.
+      # The Nerd Font is installed in post-install, so it is added as an exception.
+      # Taps are declared "trusted: true" because `cleanup --force` resets Homebrew's
+      # trust store to whatever the Brewfile says (otherwise it would undo `brew trust`).
+      # Guards: aborts BEFORE removing anything if yq is missing or the generated
+      # Brewfile has no formulae/casks (e.g. a broken YAML), which would otherwise
+      # make `--force` uninstall everything.
+      - command: |
+            set -e
+            CONFIG="$HOME/.dotfiles/install.conf.yaml"
+            command -v yq >/dev/null 2>&1 || { echo "yq not found: skipping Homebrew sync"; exit 1; }
+            T=$(mktemp)
+            trap 'rm -f "$T"' EXIT
+            { yq -r '.[] | select(has("tap"))  | .tap[]  | "tap \"\(.)\", trusted: true"' "$CONFIG"
+              yq -r '.[] | select(has("brew")) | .brew[] | "brew \"\(.)\""' "$CONFIG"
+              yq -r '.[] | select(has("cask")) | .cask[] | "cask \"\(.)\""' "$CONFIG"
+              echo 'cask "font-meslo-lg-nerd-font"'; } > "$T"
+            grep -q '^brew ' "$T" && grep -q '^cask ' "$T" || { echo "Generated Brewfile is empty: aborting Homebrew sync"; exit 1; }
+            brew bundle cleanup --file="$T" --force
         description: "Homebrew sync — removes unlisted packages"
