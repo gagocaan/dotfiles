@@ -57,12 +57,12 @@
 # Tap = extra repository of Homebrew formulas.
 # hashicorp/tap = terraform and HashiCorp tools.
 # anomalyco/tap = opencode-v2 (OpenCode CLI).
-# frankea/whisky = whisky (Wine wrapper).
+# sikarugir-app/sikarugir = sikarugir (Windows porting tool).
 
 - tap:
       - hashicorp/tap
       - anomalyco/tap # opencode-v2
-      - frankea/whisky # whisky (Wine wrapper)
+      - sikarugir-app/sikarugir # sikarugir (Wine/Windows app porting)
 
 # --- TRUST TAPS ---
 # Recent Homebrew refuses to load formulae/casks from non-official taps
@@ -74,7 +74,7 @@
 # so it also declares these taps with "trusted: true" — keep all three places in sync.
 
 - shell:
-      - command: "brew trust --tap hashicorp/tap anomalyco/tap frankea/whisky || true"
+      - command: "brew trust --tap hashicorp/tap anomalyco/tap sikarugir-app/sikarugir || true"
         description: "Trust declared Homebrew taps"
 
 # --- BREW (Formulae) - CLI Tools ---
@@ -155,16 +155,16 @@
       - spotify # Music
       - folx # Download manager/torrent
       - vorssaint # Menu bar toolkit (keep-awake, monitor, volume mixer)
-      - frankea/whisky/whisky # Wine wrapper built with SwiftUI
       # Development
       - visual-studio-code # Code editor
       - gcloud-cli # Google Cloud CLI
-      # AI
+      # AI & Agentic Tools
       - lm-studio # Run LLMs locally
       - lm-studio-bionic # LM Studio agent for open models
-      - opencode-desktop # OpenCode desktop client
-      # Utilities
+      - antigravity-cli # Google Antigravity CLI
+      # Utilities & Porting
       - balenaetcher # Flash OS images to SD cards & USB drives
+      - sikarugir # Porting tool to make Windows apps into native Mac apps
 
 # --- POST-INSTALL COMMANDS ---
 # Commands that run AFTER installing everything.
